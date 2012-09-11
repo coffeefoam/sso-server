@@ -7,6 +7,8 @@ import com.google.inject.servlet.ServletModule;
 import net.yoomai.gate.AuthGate;
 import net.yoomai.gate.STGate;
 
+import javax.servlet.ServletContextEvent;
+
 /**
  * @(#)YoomaiContext.java 1.0 11/09/2012
  * <p/>
@@ -23,5 +25,12 @@ public class YoomaiContext extends GuiceServletContextListener {
 				serve("/st").with(STGate.class);
 			}
 		});
+	}
+
+	@Override
+	public void contextInitialized(ServletContextEvent event) {
+		super.contextInitialized(event);
+
+
 	}
 }
