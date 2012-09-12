@@ -16,5 +16,7 @@
 		<property name="hibernate.transaction.factory_class">
 			org.hibernate.transaction.JDBCTransactionFactory
 		</property>
+
+		<mapping class="net.yoomai.model.User" />
 	</session-factory>
 </hibernate-configuration>
