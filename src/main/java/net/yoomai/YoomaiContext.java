@@ -9,6 +9,7 @@ import com.wideplay.warp.persist.PersistenceService;
 import net.yoomai.db.HibernateInitializer;
 import net.yoomai.gate.AuthGate;
 import net.yoomai.gate.STGate;
+import net.yoomai.module.DBModule;
 
 import javax.servlet.ServletContextEvent;
 
@@ -19,7 +20,7 @@ import javax.servlet.ServletContextEvent;
  * yoomai.cn. Use is subject to license terms.
  */
 public class YoomaiContext extends GuiceServletContextListener {
-	private Injector persistInjector;
+	private static Injector persistInjector;
 
 	@Override
 	protected Injector getInjector() {
@@ -36,6 +37,10 @@ public class YoomaiContext extends GuiceServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {
 		super.contextInitialized(event);
 
-		persistInjector = Guice.createInjector(PersistenceService.usingHibernate().buildModule());
+		persistInjector = Guice.createInjector(new DBModule(), PersistenceService.usingHibernate().buildModule());
+	}
+
+	public static <T> T get(Class<T> tClass) {
+		return persistInjector.getInstance(tClass);
 	}
 }

@@ -6,6 +6,7 @@ package net.yoomai.module;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
+import com.wideplay.warp.hibernate.HibernatePersistenceStrategy;
 import net.yoomai.db.HibernateInitializer;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
@@ -18,6 +19,6 @@ public class DBModule extends AbstractModule {
 	protected void configure() {
 		bind(Configuration.class).toInstance(new AnnotationConfiguration().addResource("hibernate.cfg.xml"));
 
-		bind(HibernateInitializer.class).in(Singleton.class);
+		bind(HibernateInitializer.class).asEagerSingleton();
 	}
 }
