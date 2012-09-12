@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ import java.util.Date;
  * @since 1.5
  */
 @Entity
-public class User {
+public class User implements Serializable {
 	@Id
 	@GeneratedValue
 	private long uid;
