@@ -4,6 +4,8 @@
  */
 package net.yoomai.gate;
 
+import com.google.inject.Singleton;
+
 import javax.servlet.http.HttpServlet;
 
 /**
@@ -12,5 +14,6 @@ import javax.servlet.http.HttpServlet;
  * 这是获取服务Tickit的目标地址。当客户端请求被转向到此地址，该服务将对客户端的TGT进行验证，
  * 若通过，则进行ST的下发，若没通过，则进行转向，进行登录授权。
  */
+@Singleton
 public class STGate extends HttpServlet {
 }

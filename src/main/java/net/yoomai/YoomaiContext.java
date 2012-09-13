@@ -1,12 +1,11 @@
 package net.yoomai;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import com.wideplay.warp.persist.PersistenceService;
-import net.yoomai.db.HibernateInitializer;
+import com.wideplay.warp.persist.UnitOfWork;
 import net.yoomai.gate.AuthGate;
 import net.yoomai.gate.STGate;
 import net.yoomai.module.DBModule;
@@ -37,7 +36,8 @@ public class YoomaiContext extends GuiceServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {
 		super.contextInitialized(event);
 
-		persistInjector = Guice.createInjector(new DBModule(), PersistenceService.usingHibernate().buildModule());
+		persistInjector = Guice.createInjector(new DBModule(), PersistenceService.usingHibernate()
+			.across(UnitOfWork.REQUEST).buildModule());
 	}
 
 	public static <T> T get(Class<T> tClass) {
