@@ -17,4 +17,15 @@ public class UserService {
 	public UserService(UserDAO udao) {
 		this.udao = udao;
 	}
+
+	/**
+	 * 用户的验证方法。
+	 *
+	 * @param name
+	 * @param password
+	 * @return
+	 */
+	public boolean auth(String name, String password) {
+		return true;
+	}
 }

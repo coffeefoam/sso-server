@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @(#)AuthGate.java 1.0 11/09/2012
@@ -19,11 +21,14 @@ import java.io.IOException;
  */
 @Singleton
 public class AuthGate extends HttpServlet {
+	// 暂时用于存放TGT
+	private static Map map = new HashMap();
+
 	@Inject
 	private UserService service;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println(service);
+
 	}
 }
