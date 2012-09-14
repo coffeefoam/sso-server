@@ -7,3 +7,11 @@ CREATE TABLE IF NOT EXISTS user (
     lastIp varchar(15) default '',
     lastTime date
 );
+
+CREATE TABLE IF NOT EXISTS tgt (
+	id int(5) unsigned not null auto_increment primary key,
+	uid int(5) not null,
+	ticket varchar(100) not null,
+    ip varchar(15) not null,
+    grantTime date not null
+);
