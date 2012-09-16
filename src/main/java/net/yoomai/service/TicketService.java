@@ -6,10 +6,12 @@ package net.yoomai.service;
 
 import net.yoomai.model.GrantTicket;
 import net.yoomai.util.StringUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,8 +32,7 @@ public class TicketService {
 	 * @param request
 	 * @param response
 	 * @return
-	 */
-	public String generateTGT(HttpServletRequest request, HttpServletResponse response) {
+  	public String generateTGT(HttpServletRequest request, HttpServletResponse response) {
 		String _tgt_id = "";
 		Cookie[] cookies = request.getCookies();
 		for (int index = 0; index < cookies.length; index++) {
@@ -61,6 +62,10 @@ public class TicketService {
 		String id = StringUtils.getUniqueID(10);
 		gt.setId(id);
 		gt.setUid(uid);
+		gt.setIp(ip);
+		gt.setGrantTime(new Date());
+
+		byte[] tickets = DigestUtils.sha(id);
 
 
 		return null;
