@@ -21,7 +21,7 @@ public class YoomaiContext extends GuiceServletContextListener {
 	protected Injector getInjector() {
 		return Guice.createInjector(
 			new DBModule(),
-			PersistenceService.usingHibernate().across(UnitOfWork.REQUEST).buildModule(),
+			PersistenceService.usingHibernate().across(UnitOfWork.TRANSACTION).buildModule(),
 			new ServletModule() {
 				@Override
 				protected void configureServlets() {

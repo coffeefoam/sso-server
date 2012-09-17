@@ -5,6 +5,7 @@
 package net.yoomai.module;
 
 import com.google.inject.AbstractModule;
+import net.yoomai.config.InitializerHibernate;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
@@ -14,6 +15,8 @@ import org.hibernate.cfg.Configuration;
 public class DBModule extends AbstractModule {
 	@Override
 	protected void configure() {
-		bind(Configuration.class).toInstance(new AnnotationConfiguration().addResource("hibernate.cfg.xml"));
+		bind(Configuration.class).toInstance(new AnnotationConfiguration().addResource("user.hbm.xml"));
+
+		bind(InitializerHibernate.class).asEagerSingleton();
 	}
 }

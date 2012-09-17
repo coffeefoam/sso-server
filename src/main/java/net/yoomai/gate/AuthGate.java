@@ -2,6 +2,7 @@ package net.yoomai.gate;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import net.yoomai.model.User;
 import net.yoomai.service.TicketService;
 import net.yoomai.service.UserService;
 
@@ -25,8 +26,14 @@ public class AuthGate extends HttpServlet {
 	@Inject
 	private TicketService ticketService;
 
+
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = service.auth("yulei", "yulei");
+
+		String _tgt_id = ticketService.generateTGT(request.getCookies(), user);
+
+		response.getWriter().write(_tgt_id);
 
 	}
 }

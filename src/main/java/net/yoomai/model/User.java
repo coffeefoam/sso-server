@@ -6,10 +6,6 @@
  */
 package net.yoomai.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,12 +14,9 @@ import java.util.Date;
  * @version 1.0, 12/09/2012
  * @since 1.5
  */
-@Entity
 public class User implements Serializable {
-	@Id
-	@GeneratedValue
 	private long uid;
-	private String name;
+	private String username;
 	private String password;
 	private String lastIp;
 	private Date lastTime;
@@ -36,12 +29,12 @@ public class User implements Serializable {
 		this.uid = uid;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
