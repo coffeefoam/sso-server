@@ -53,7 +53,8 @@ public class TicketService {
 			map.put(gt.getId(), gt);
 			_tgt_id = gt.getId();
 		} else {
-			_tgt_id = (String) obj;
+			GrantTicket gt = (GrantTicket) obj;
+			_tgt_id = gt.getId();
 		}
 
 		return _tgt_id;

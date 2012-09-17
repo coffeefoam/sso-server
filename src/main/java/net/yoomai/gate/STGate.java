@@ -4,9 +4,15 @@
  */
 package net.yoomai.gate;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import net.yoomai.service.TicketService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @(#)STGate.java 1.0 11/09/2012
@@ -16,4 +22,11 @@ import javax.servlet.http.HttpServlet;
  */
 @Singleton
 public class STGate extends HttpServlet {
+	@Inject
+	private TicketService service;
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	}
 }
