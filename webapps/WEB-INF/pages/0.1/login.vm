@@ -1,0 +1,9 @@
+<html>
+<head>
+	<title>登陆页面</title>
+</head>
+<body>
+	<input type="text" name="username" id="username" />
+	<input type="password" name="password" id="password" />
+</body>
+</html>

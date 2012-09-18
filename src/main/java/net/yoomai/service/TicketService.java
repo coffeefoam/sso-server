@@ -4,6 +4,8 @@
  */
 package net.yoomai.service;
 
+import com.google.inject.Inject;
+import net.yoomai.cache.CacheWrapper;
 import net.yoomai.model.GrantTicket;
 import net.yoomai.model.User;
 import net.yoomai.util.StringUtils;
@@ -11,8 +13,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.Cookie;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @(#)TickitService.java 1.0 14/09/2012
@@ -20,10 +20,8 @@ import java.util.Map;
  * Ticket生成和验证的服务模块.
  */
 public class TicketService {
-	// 暂时用于存放TGT
-	private static Map map = new HashMap();
-	// 暂时存放ST
-	private static Map st = new HashMap();
+	@Inject
+	private CacheWrapper cache;
 
 	public TicketService() {
 	}
@@ -44,13 +42,11 @@ public class TicketService {
 				}
 			}
 		}
-
-		Object obj = map.get(_tgt_id);
-
+		Object obj = cache.get(_tgt_id);
 		if (obj == null) {
 			// 生成一个TGT标识
 			GrantTicket gt = generateTGT(user.getUid(), user.getLastIp());
-			map.put(gt.getId(), gt);
+
 			_tgt_id = gt.getId();
 		} else {
 			GrantTicket gt = (GrantTicket) obj;

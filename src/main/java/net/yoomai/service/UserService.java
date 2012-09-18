@@ -27,7 +27,6 @@ public class UserService {
 	 * @return
 	 */
 	public User auth(String name, String password) {
-		System.out.println("udao: " + udao);
 		User user = udao.find(name, password);
 		return user;
 	}
