@@ -41,12 +41,6 @@ public class EhcacheWrapper<K, V> implements CacheWrapper<K, V> {
 	}
 
 	public Ehcache getCache() {
-		System.out.println(cacheManager);
-		String[] names = cacheManager.getCacheNames();
-		System.out.println(names.length);
-		for (int index=0; index<names.length; index++) {
-			System.out.println(names[index]);
-		}
 		return cacheManager.getEhcache(cacheName);
 	}
 }
