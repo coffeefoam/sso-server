@@ -15,7 +15,7 @@ import org.hibernate.cfg.Configuration;
 public class DBModule extends AbstractModule {
 	@Override
 	protected void configure() {
-		bind(Configuration.class).toInstance(new AnnotationConfiguration().addResource("user.hbm.xml"));
+		bind(Configuration.class).toInstance(new AnnotationConfiguration().addResource("model.xml"));
 
 		bind(InitializerHibernate.class).asEagerSingleton();
 	}
