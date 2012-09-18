@@ -10,6 +10,7 @@ import com.google.inject.name.Names;
 import net.sf.ehcache.CacheManager;
 import net.yoomai.cache.CacheWrapper;
 import net.yoomai.cache.EhcacheWrapper;
+import net.yoomai.config.GlobalConfig;
 
 /**
  * @(#)CacheModule.java 1.0 18/09/2012
@@ -18,7 +19,7 @@ public class CacheModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		bind(String.class).annotatedWith(Names.named("cachename")).toInstance("sso-cache");
+		bind(String.class).annotatedWith(Names.named("cachename")).toInstance(GlobalConfig.get("cache"));
 		bind(CacheWrapper.class).to(EhcacheWrapper.class);
 	}
 

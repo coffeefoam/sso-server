@@ -4,7 +4,6 @@
  */
 package net.yoomai.config;
 
-import com.google.inject.name.Named;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
@@ -14,13 +13,17 @@ import org.apache.commons.configuration.PropertiesConfiguration;
  * 全局性配置文件的加载与设置。
  */
 public class GlobalConfig {
-  	private PropertiesConfiguration configuration;
+  	private static PropertiesConfiguration configuration;
 
-	public GlobalConfig(@Named("properties.name") String propName) {
+	static {
 		try {
-			configuration = new PropertiesConfiguration(propName);
+			configuration = new PropertiesConfiguration("global.properties");
 		} catch (ConfigurationException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static String get(String key) {
+		return configuration.getString(key);
 	}
 }
