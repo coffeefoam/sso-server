@@ -8,9 +8,12 @@ import com.google.inject.Inject;
 import net.yoomai.cache.CacheWrapper;
 import net.yoomai.db.GrantTicketDAO;
 import net.yoomai.model.GrantTicket;
+import net.yoomai.model.User;
+import net.yoomai.util.StringUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.Cookie;
+import java.util.Date;
 
 /**
  * @(#)TickitService.java 1.0 14/09/2012
@@ -59,6 +62,26 @@ public class TicketService {
 			return null;
 		}
 		return gt.getTicket();
+	}
+
+	/**
+	 * 生成新的TGT
+	 * @param user
+	 * @return
+	 */
+	public GrantTicket generateTGT(User user, String ip) {
+		GrantTicket gt = new GrantTicket();
+		String id = StringUtils.getUniqueID(5);
+		gt.setId(id);
+		gt.setUid(user.getUid());
+		String ticket = DigestUtils.md5Hex(id + "|" + ip);
+		gt.setTicket(ticket);
+		gt.setIp(ip);
+		gt.setGrantTime(new Date());
+
+		gtdao.save(gt);
+
+		return gt;
 	}
 
 	/**

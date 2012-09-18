@@ -38,16 +38,15 @@ public class AuthGate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
    	    String appId = NetUtil.getStringParameter(request, "appId", "");
 		String back = NetUtil.getStringParameter(request, "back", "/welcome");
-		String redirect = "/login";
+		String redirect = back;
 
-		if ("".equals(service) || service == null) {
+		if ("".equals(appId) || appId == null) {
 			response.sendRedirect(back);
 		}
 
 		Map params = new HashMap();
 		params.put("appId", appId);
 		params.put("back", back);
-
 		String _tgt_id = ticketService.verifyTGT(request.getCookies());
 		if (_tgt_id != null) {
 			String ticket = ticketService.verifyTGT(_tgt_id);
@@ -55,7 +54,11 @@ public class AuthGate extends HttpServlet {
 				// 分配相应的ST，然后跳转
 				String st = ticketService.generateST(appId, ticket);
 				params.put("st", st);
+			} else {
+				redirect = "/login";
 			}
+		} else {
+			redirect = "/login";
 		}
 
 		String p = makeRedirectParams(params);

@@ -7,11 +7,14 @@ package net.yoomai.gate;
 import cn.com.opensource.net.NetUtil;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import net.yoomai.model.GrantTicket;
 import net.yoomai.model.User;
 import net.yoomai.service.TemplateService;
+import net.yoomai.service.TicketService;
 import net.yoomai.service.UserService;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +33,8 @@ public class LoginGate extends HttpServlet {
 	private TemplateService templateService;
 	@Inject
 	private UserService userService;
+	@Inject
+	private TicketService ticketService;
 
 
 	@Override
@@ -37,18 +42,22 @@ public class LoginGate extends HttpServlet {
 		String action = NetUtil.getStringParameter(request, "action", "");
 		String appId = NetUtil.getStringParameter(request, "appId", "");
 		String back = NetUtil.getStringParameter(request, "back", "");
-		System.out.println("action:" + action);
+
 		if ("signin".equals(action)) {
-			// 处理登录请求, 登录成功后系统分配一个有效的TGT，重定向到back
+			// 处理登录请求
 			String username = NetUtil.getStringParameter(request, "username", "");
 			String password = NetUtil.getStringParameter(request, "password", "");
 
 			User user = userService.auth(username, password);
-			System.out.println(username + ":" + password + ":" + user);
+
 			if (user == null) {
 				response.sendRedirect("/login");
 			} else {
-				response.sendRedirect("/welcome");
+				// 登录成功，分配一个有效的TGT，后重定向到/auth
+			    GrantTicket gt = ticketService.generateTGT(user, request.getRemoteAddr());
+				Cookie cookie = new Cookie("_id_", gt.getId());
+				response.addCookie(cookie);
+				response.sendRedirect("/auth?appId=" + appId + "&back=" + back);
 			}
 		} else {
 			Map params = new HashMap();
