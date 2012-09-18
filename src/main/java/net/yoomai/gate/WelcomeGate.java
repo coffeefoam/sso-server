@@ -4,7 +4,9 @@
  */
 package net.yoomai.gate;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import net.yoomai.service.TemplateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +19,11 @@ import java.io.IOException;
  */
 @Singleton
 public class WelcomeGate extends HttpServlet {
+	@Inject
+	private TemplateService templateService;
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().write("欢迎访问SSO-SERVER");
+		response.getWriter().write(templateService.paint(null, "welcome"));
 	}
 }
