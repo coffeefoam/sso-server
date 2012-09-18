@@ -4,7 +4,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
-	<input type="text" name="username" id="username" />
-	<input type="password" name="password" id="password" />
+	<form action="/login">
+	<input type="text" name="username" id="username" /> <br/>
+	<input type="password" name="password" id="password" />   <br/>
+	<input type="hidden" name="action" value="signin" />
+	<input type="hidden" name="appId" value="$appId" />
+	<input type="submit" value="SUBMIT" />
+	</form>
 </body>
 </html>

@@ -6,6 +6,7 @@ package net.yoomai.db;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.wideplay.warp.persist.Transactional;
 import org.hibernate.Session;
 
 import java.io.Serializable;
@@ -24,18 +25,22 @@ public class BaseDAO<T, PK extends Serializable> {
 		this.persistClass = persistClass;
 	}
 
+	@Transactional
 	public T find(PK id) {
 		return (T) session.get().get(persistClass, id);
 	}
 
+	@Transactional
 	public List<T> findAll() {
 		return session.get().createQuery("from " + this.persistClass.getSimpleName()).list();
 	}
 
+	@Transactional
 	public void save(T object) {
 		session.get().save(object);
 	}
 
+	@Transactional
 	public void remove(PK id) {
 		Object obj = session.get().get(persistClass, id);
 		if (obj != null) {

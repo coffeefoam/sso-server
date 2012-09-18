@@ -6,13 +6,11 @@ package net.yoomai.service;
 
 import com.google.inject.Inject;
 import net.yoomai.cache.CacheWrapper;
+import net.yoomai.db.GrantTicketDAO;
 import net.yoomai.model.GrantTicket;
-import net.yoomai.model.User;
-import net.yoomai.util.StringUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.Cookie;
-import java.util.Date;
 
 /**
  * @(#)TickitService.java 1.0 14/09/2012
@@ -22,17 +20,21 @@ import java.util.Date;
 public class TicketService {
 	@Inject
 	private CacheWrapper cache;
+	private GrantTicketDAO gtdao;
 
-	public TicketService() {
+	@Inject
+	public TicketService(GrantTicketDAO gtdao) {
+		this.gtdao = gtdao;
 	}
 
 	/**
-	 * 生成和验证TGT的接口
+	 * 第一步，验证TGT是否在cookie中存在标识，如果存在，则把标示返回.
 	 *
+	 * @param cookies
 	 * @return
 	 */
-	public String generateTGT(Cookie[] cookies, User user) {
-		String _tgt_id = "";
+	public String verifyTGT(Cookie[] cookies) {
+		String _tgt_id = null;
 
 		if (cookies != null) {
 			for (int index = 0; index < cookies.length; index++) {
@@ -42,35 +44,34 @@ public class TicketService {
 				}
 			}
 		}
-		Object obj = cache.get(_tgt_id);
-		if (obj == null) {
-			// 生成一个TGT标识
-			GrantTicket gt = generateTGT(user.getUid(), user.getLastIp());
-
-			_tgt_id = gt.getId();
-		} else {
-			GrantTicket gt = (GrantTicket) obj;
-			_tgt_id = gt.getId();
-		}
 
 		return _tgt_id;
 	}
 
 	/**
-	 * 用于生成TGT
-	 *
+	 * 第二步，验证库里是否存在真实的ticket标识，如果有，则返回真实的ticket，如果没有，则返回null
+	 * @param tgtId
 	 * @return
 	 */
-	private GrantTicket generateTGT(long uid, String ip) {
-		GrantTicket gt = new GrantTicket();
+	public String verifyTGT(String tgtId) {
+		GrantTicket gt = gtdao.find(tgtId);
+		if (gt == null) {
+			return null;
+		}
+		return gt.getTicket();
+	}
 
-		String id = StringUtils.getUniqueID(10);
-		gt.setId(id);
-		gt.setUid(uid);
-		gt.setIp(ip);
-		gt.setGrantTime(new Date());
-		gt.setTicket(DigestUtils.md5Hex(id + "|" + ip));
+	/**
+	 * 根据相应的应用编码与TGT，分配相应的ST
+	 *
+	 * @param appId
+	 * @param ticket
+	 * @return
+	 */
+	public String generateST(String appId, String ticket) {
+		String st = DigestUtils.md5Hex(appId + ticket);
+		cache.put(appId, st);
 
-		return gt;
+		return st;
 	}
 }
