@@ -36,7 +36,7 @@ public class AuthGate extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-   	    String appId = NetUtil.getStringParameter(request, "appId", "");
+   	    String appId = NetUtil.getStringParameter(request, "app", "");
 		String back = NetUtil.getStringParameter(request, "back", "/welcome");
 		String redirect = back;
 
@@ -45,7 +45,7 @@ public class AuthGate extends HttpServlet {
 		}
 
 		Map params = new HashMap();
-		params.put("appId", appId);
+		params.put("app", appId);
 		params.put("back", back);
 		String _tgt_id = ticketService.verifyTGT(request.getCookies());
 		if (_tgt_id != null) {
@@ -63,6 +63,16 @@ public class AuthGate extends HttpServlet {
 
 		String p = makeRedirectParams(params);
 		response.sendRedirect(redirect + "?" + p);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   	    String app = NetUtil.getStringParameter(request, "app", "");
+		long uid = NetUtil.getLongParameter(request, "uid", 0L);
+		String ticket = NetUtil.getStringParameter(request, "ticket", "");
+
+		String token = ticketService.verifyST(app, uid, ticket);
+		response.getWriter().write(token);
 	}
 
 	private String makeRedirectParams(Map<String, String> params) {

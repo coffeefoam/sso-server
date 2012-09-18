@@ -14,6 +14,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.Cookie;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @(#)TickitService.java 1.0 14/09/2012
@@ -53,6 +54,7 @@ public class TicketService {
 
 	/**
 	 * 第二步，验证库里是否存在真实的ticket标识，如果有，则返回真实的ticket，如果没有，则返回null
+	 *
 	 * @param tgtId
 	 * @return
 	 */
@@ -66,6 +68,7 @@ public class TicketService {
 
 	/**
 	 * 生成新的TGT
+	 *
 	 * @param user
 	 * @return
 	 */
@@ -96,5 +99,42 @@ public class TicketService {
 		cache.put(appId, st);
 
 		return st;
+	}
+
+	/**
+	 * 根据用户ID，寻找最后一次授权的TGT，并根据这个TGT来生成相应的一个ST
+	 *
+	 * @param appId
+	 * @param uid
+	 * @return
+	 */
+	public String generateST(String appId, long uid) {
+		List<GrantTicket> tickets = gtdao.find(uid);
+		GrantTicket ticket = tickets.get(0); // 取最后一次的
+		return generateST(appId, ticket.getTicket());
+	}
+
+	/**
+	 * 验证ST，成功返回新的ticket，否则返回null
+	 *
+	 * @param appId
+	 * @param uid
+	 * @return
+	 */
+	public String verifyST(String appId, long uid, String ticket) {
+		Object obj = cache.get(appId);
+		if (obj == null) {
+			return null;
+		} else {
+			String ticketCache = (String) obj;
+			if (ticketCache.equals(ticket)) {
+				cache.remove(appId);
+				String newTicket = generateST(appId, uid);
+				cache.put(appId, newTicket);
+				return newTicket;
+			} else {
+				return null;
+			}
+		}
 	}
 }

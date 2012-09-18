@@ -40,7 +40,7 @@ public class LoginGate extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = NetUtil.getStringParameter(request, "action", "");
-		String appId = NetUtil.getStringParameter(request, "appId", "");
+		String appId = NetUtil.getStringParameter(request, "app", "");
 		String back = NetUtil.getStringParameter(request, "back", "");
 
 		if ("signin".equals(action)) {
@@ -57,11 +57,11 @@ public class LoginGate extends HttpServlet {
 			    GrantTicket gt = ticketService.generateTGT(user, request.getRemoteAddr());
 				Cookie cookie = new Cookie("_id_", gt.getId());
 				response.addCookie(cookie);
-				response.sendRedirect("/auth?appId=" + appId + "&back=" + back);
+				response.sendRedirect("/auth?app=" + appId + "&back=" + back);
 			}
 		} else {
 			Map params = new HashMap();
-			params.put("appId", appId);
+			params.put("app", appId);
 			// 显示登录界面
 	 	    response.getWriter().write(templateService.paint(params, "login"));
 		}

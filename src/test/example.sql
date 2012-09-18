@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS user (
     username varchar(10) not null,
     password varchar(100) not null,
     lastIp varchar(15) default '',
-    lastTime date
+    lastTime datetime
 );
 
 INSERT INTO user(username, password) values("yulei", "yulei");
@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS tgt (
 	uid int(5) not null,
 	ticket varchar(100) not null,
     ip varchar(15) not null,
-    grantTime date not null
+    grantTime datetime not null
 );

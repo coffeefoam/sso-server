@@ -28,6 +28,10 @@ public class EhcacheWrapper<K, V> implements CacheWrapper<K, V> {
 		getCache().put(new Element(key, value));
 	}
 
+	public void remove(final K key) {
+		getCache().remove(key);
+	}
+
 	public V get(final K key) {
 		Element element = getCache().get(key);
 		if (element != null) {
