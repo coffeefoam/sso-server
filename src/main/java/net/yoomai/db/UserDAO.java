@@ -20,8 +20,8 @@ public class UserDAO extends BaseDAO<User, Long> {
 	}
 
 	@Transactional
-	@Finder(query="from User where username=:username and password=:password")
-	public User find(@Named("username") String username, @Named("password") String password) {
+	@Finder(query="from User where uid=:uid and password=:password")
+	public User find(@Named("uid") long uid, @Named("password") String password) {
 		throw new AssertionError();
 	}
 

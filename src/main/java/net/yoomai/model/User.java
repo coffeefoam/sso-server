@@ -6,6 +6,7 @@
  */
 package net.yoomai.model;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,9 +17,11 @@ import java.util.Date;
  */
 public class User implements Serializable {
 	private long uid;
-	private String username;
 	private String password;
+
+	@Transient
 	private String lastIp;
+	@Transient
 	private Date lastTime;
 
 	public long getUid() {
@@ -27,14 +30,6 @@ public class User implements Serializable {
 
 	public void setUid(long uid) {
 		this.uid = uid;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {

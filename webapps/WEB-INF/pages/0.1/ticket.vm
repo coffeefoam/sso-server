@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
 <sso>
+	<verify></verify>
+	<ticket></ticket>
+	<user>
 
+	</user>
 </sso>

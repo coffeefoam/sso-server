@@ -22,12 +22,13 @@ public class UserService {
 	/**
 	 * 用户的验证方法。
 	 *
-	 * @param name
+	 * @param uid
 	 * @param password
 	 * @return
 	 */
-	public User auth(String name, String password) {
-		User user = udao.find(name, password);
+	public User auth(long uid, String password) {
+		User user = udao.find(uid, password);
+		System.out.println(user);
 		return user;
 	}
 }

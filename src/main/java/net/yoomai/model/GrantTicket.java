@@ -4,9 +4,6 @@
  */
 package net.yoomai.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,23 +12,12 @@ import java.util.Date;
  *
  * TGT的数据结构
  */
-@Entity
-@Table(name = "tgt")
 public class GrantTicket implements Serializable {
-	@Id
-	private String id;
 	private long uid;
+	private String sid;
 	private String ticket;
-	private String ip;
-	private Date grantTime;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
+	private String lastIp;
+	private Date lastTime;
 
 	public long getUid() {
 		return uid;
@@ -39,6 +25,14 @@ public class GrantTicket implements Serializable {
 
 	public void setUid(long uid) {
 		this.uid = uid;
+	}
+
+	public String getSid() {
+		return sid;
+	}
+
+	public void setSid(String sid) {
+		this.sid = sid;
 	}
 
 	public String getTicket() {
@@ -49,19 +43,19 @@ public class GrantTicket implements Serializable {
 		this.ticket = ticket;
 	}
 
-	public String getIp() {
-		return ip;
+	public String getLastIp() {
+		return lastIp;
 	}
 
-	public void setIp(String ip) {
-		this.ip = ip;
+	public void setLastIp(String lastIp) {
+		this.lastIp = lastIp;
 	}
 
-	public Date getGrantTime() {
-		return grantTime;
+	public Date getLastTime() {
+		return lastTime;
 	}
 
-	public void setGrantTime(Date grantTime) {
-		this.grantTime = grantTime;
+	public void setLastTime(Date lastTime) {
+		this.lastTime = lastTime;
 	}
 }

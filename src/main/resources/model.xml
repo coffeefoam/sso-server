@@ -1,21 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="net.yoomai.model">
-	<class name="User" table="user">
-		<id name="uid" column="uid"></id>
-		<property name="username" column="username" />
-		<property name="password" column="password" />
-		<property name="lastIp" column="lastIp" />
-		<property name="lastTime" column="lastTime" />
+	<class name="User" table="NEW5I5JDBA.users">
+		<id name="uid" column="usersid"></id>
+		<property name="password" column="password"/>
 	</class>
 
-	<class name="GrantTicket" table="tgt">
-		<id name="id" column="id" />
-		<property name="uid" column="uid" />
-		<property name="ticket" column="ticket" />
-		<property name="ip" column="ip" />
-		<property name="grantTime" column="grantTime" />
+	<class name="GrantTicket" table="NEW5I5JDBA.ssotgt">
+		<id name="uid" column="userid"/>
+		<property name="sid" column="sid"/>
+		<property name="ticket" column="ticket"/>
+		<property name="lastIp" column="lastIp"/>
+		<property name="lastTime" column="lastTime"/>
 	</class>
 </hibernate-mapping>

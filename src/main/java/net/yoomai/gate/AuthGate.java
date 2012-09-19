@@ -37,11 +37,14 @@ public class AuthGate extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
    	    String appId = NetUtil.getStringParameter(request, "app", "");
+		String service = NetUtil.getStringParameter(request, "service", "");
 		String back = NetUtil.getStringParameter(request, "back", "/welcome");
+
 		String redirect = back;
 
 		if ("".equals(appId) || appId == null) {
 			response.sendRedirect(back);
+			return;
 		}
 
 		Map params = new HashMap();
@@ -52,7 +55,7 @@ public class AuthGate extends HttpServlet {
 			String ticket = ticketService.verifyTGT(_tgt_id);
 			if (ticket != null) {
 				// 分配相应的ST，然后跳转
-				String st = ticketService.generateST(appId, ticket);
+				String st = ticketService.generateST(appId, service);
 				params.put("st", st);
 			} else {
 				redirect = "/login";
@@ -63,15 +66,16 @@ public class AuthGate extends HttpServlet {
 
 		String p = makeRedirectParams(params);
 		response.sendRedirect(redirect + "?" + p);
+		return;
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
    	    String app = NetUtil.getStringParameter(request, "app", "");
-		long uid = NetUtil.getLongParameter(request, "uid", 0L);
+		String service = NetUtil.getStringParameter(request, "service", "");
 		String ticket = NetUtil.getStringParameter(request, "ticket", "");
 
-		String token = ticketService.verifyST(app, uid, ticket);
+		String token = ticketService.verifyST(app, service, ticket);
 		response.getWriter().write(token);
 	}
 

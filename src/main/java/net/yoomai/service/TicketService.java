@@ -9,12 +9,10 @@ import net.yoomai.cache.CacheWrapper;
 import net.yoomai.db.GrantTicketDAO;
 import net.yoomai.model.GrantTicket;
 import net.yoomai.model.User;
-import net.yoomai.util.StringUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.Cookie;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @(#)TickitService.java 1.0 14/09/2012
@@ -74,15 +72,13 @@ public class TicketService {
 	 */
 	public GrantTicket generateTGT(User user, String ip) {
 		GrantTicket gt = new GrantTicket();
-		String id = StringUtils.getUniqueID(5);
-		gt.setId(id);
+		gt.setLastIp(ip);
+		gt.setLastTime(new Date());
+		gt.setTicket(user.getUid() + "|" + ip);
 		gt.setUid(user.getUid());
-		String ticket = DigestUtils.md5Hex(id + "|" + ip);
-		gt.setTicket(ticket);
-		gt.setIp(ip);
-		gt.setGrantTime(new Date());
+		gt.setSid("");
 
-		gtdao.save(gt);
+		cache.put(user.getUid(), gt);
 
 		return gt;
 	}
@@ -91,50 +87,29 @@ public class TicketService {
 	 * 根据相应的应用编码与TGT，分配相应的ST
 	 *
 	 * @param appId
-	 * @param ticket
 	 * @return
 	 */
-	public String generateST(String appId, String ticket) {
-		String st = DigestUtils.md5Hex(appId + ticket);
-		cache.put(appId, st);
-
+	public String generateST(String appId, String service) {
+		String st = DigestUtils.md5Hex(appId + "|" + service + "|" + new Date().getTime());
+		cache.put(st, appId + "|" + service + "|");
 		return st;
 	}
 
-	/**
-	 * 根据用户ID，寻找最后一次授权的TGT，并根据这个TGT来生成相应的一个ST
-	 *
-	 * @param appId
-	 * @param uid
-	 * @return
-	 */
-	public String generateST(String appId, long uid) {
-		List<GrantTicket> tickets = gtdao.find(uid);
-		GrantTicket ticket = tickets.get(0); // 取最后一次的
-		return generateST(appId, ticket.getTicket());
-	}
 
 	/**
 	 * 验证ST，成功返回新的ticket，否则返回null
 	 *
 	 * @param appId
-	 * @param uid
 	 * @return
 	 */
-	public String verifyST(String appId, long uid, String ticket) {
-		Object obj = cache.get(appId);
+	public String verifyST(String appId, String service, String ticket) {
+		Object obj = cache.get(ticket);
 		if (obj == null) {
 			return null;
 		} else {
-			String ticketCache = (String) obj;
-			if (ticketCache.equals(ticket)) {
-				cache.remove(appId);
-				String newTicket = generateST(appId, uid);
-				cache.put(appId, newTicket);
-				return newTicket;
-			} else {
-				return null;
-			}
+			cache.remove(appId);
+			String newTicket = generateST(appId, service);
+			return newTicket;
 		}
 	}
 }

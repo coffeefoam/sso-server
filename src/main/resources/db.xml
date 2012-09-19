@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <proxool>
 	<alias>sso</alias>
-	<driver-url>jdbc:mysql://localhost/sso?useUnicode=true&amp;characterEncoding=UTF8</driver-url>
-	<driver-class>com.mysql.jdbc.Driver</driver-class>
+	<!--<driver-url>jdbc:mysql://localhost/sso?useUnicode=true&amp;characterEncoding=UTF8</driver-url>-->
+	<driver-url>jdbc:oracle:thin:@10.10.100.57:1521:oradb57</driver-url>
+	<driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
 	<driver-properties>
-		<property name="user" value="root"/>
-		<property name="password" value="yulei"/>
+		<property name="user" value="web5i5jdba"/>
+		<property name="password" value="123"/>
 	</driver-properties>
 	<maximum-connection-count>80</maximum-connection-count>
 	<simultaneous-build-throttle>20</simultaneous-build-throttle>

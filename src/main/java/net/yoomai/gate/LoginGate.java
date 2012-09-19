@@ -45,17 +45,17 @@ public class LoginGate extends HttpServlet {
 
 		if ("signin".equals(action)) {
 			// 处理登录请求
-			String username = NetUtil.getStringParameter(request, "username", "");
+			long uid = NetUtil.getLongParameter(request, "uid", 0);
 			String password = NetUtil.getStringParameter(request, "password", "");
 
-			User user = userService.auth(username, password);
+			User user = userService.auth(uid, password);
 
 			if (user == null) {
 				response.sendRedirect("/login");
 			} else {
 				// 登录成功，分配一个有效的TGT，后重定向到/auth
 			    GrantTicket gt = ticketService.generateTGT(user, request.getRemoteAddr());
-				Cookie cookie = new Cookie("_id_", gt.getId());
+				Cookie cookie = new Cookie("_id_", String.valueOf(gt.getUid()));
 				response.addCookie(cookie);
 				response.sendRedirect("/auth?app=" + appId + "&back=" + back);
 			}
