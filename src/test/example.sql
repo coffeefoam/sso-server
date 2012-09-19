@@ -11,9 +11,8 @@ CREATE TABLE IF NOT EXISTS user (
 INSERT INTO user(username, password) values("yulei", "yulei");
 
 CREATE TABLE IF NOT EXISTS tgt (
-	id varchar(5) not null primary key,
-	uid int(5) not null,
+	uid int(5) not null auto_increment primary key,
+	sid varchar(100) not null,
 	ticket varchar(100) not null,
-    ip varchar(15) not null,
-    grantTime datetime not null
+
 );

@@ -36,8 +36,15 @@ public class AuthGate extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		 * 必传的两个参数 app和service
+		 * app是在sso注册过的域名所分配的编号
+		 * service是该域名下面要进行服务认证的服务代码
+		 * service ticket是根据app和service以及一个时间戳来生成
+		 */
    	    String appId = NetUtil.getStringParameter(request, "app", "");
 		String service = NetUtil.getStringParameter(request, "service", "");
+		// back是客户端要在认证做完之后进行跳转的地址，默认是sso域名下面的welcome页面
 		String back = NetUtil.getStringParameter(request, "back", "/welcome");
 
 		String redirect = back;
@@ -47,9 +54,11 @@ public class AuthGate extends HttpServlet {
 			return;
 		}
 
-		Map params = new HashMap();
+		Map<String, String> params = new HashMap<String, String>();
 		params.put("app", appId);
+		params.put("service", service);
 		params.put("back", back);
+
 		String _tgt_id = ticketService.verifyTGT(request.getCookies());
 		if (_tgt_id != null) {
 			String ticket = ticketService.verifyTGT(_tgt_id);
@@ -73,7 +82,9 @@ public class AuthGate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
    	    String app = NetUtil.getStringParameter(request, "app", "");
 		String service = NetUtil.getStringParameter(request, "service", "");
-		String ticket = NetUtil.getStringParameter(request, "ticket", "");
+		// 这是在进行点对点验证的情况下，才会进行service ticket的接收，接下来就是进行st的验证
+		// 当验证成功后，会返回新的st串；若没成功，则会返回空串
+		String ticket = NetUtil.getStringParameter(request, "st", "");
 
 		String token = ticketService.verifyST(app, service, ticket);
 		response.getWriter().write(token);
@@ -82,9 +93,9 @@ public class AuthGate extends HttpServlet {
 	private String makeRedirectParams(Map<String, String> params) {
 		StringBuffer buffer = new StringBuffer();
 
-		Iterator keys = params.keySet().iterator();
+		Iterator<String> keys = params.keySet().iterator();
 		while (keys.hasNext()) {
-			String key = (String) keys.next();
+			String key = keys.next();
 			String value = params.get(key);
 
 			buffer.append(key + "=" + value);

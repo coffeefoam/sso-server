@@ -4,14 +4,17 @@
  */
 package net.yoomai.service;
 
+import cn.com.opensource.crypto.BASE64Coding;
 import com.google.inject.Inject;
 import net.yoomai.cache.CacheWrapper;
+import net.yoomai.config.GlobalConfig;
 import net.yoomai.db.GrantTicketDAO;
 import net.yoomai.model.GrantTicket;
 import net.yoomai.model.User;
-import org.apache.commons.codec.digest.DigestUtils;
+import net.yoomai.util.TeaCryptor;
 
 import javax.servlet.http.Cookie;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -21,7 +24,7 @@ import java.util.Date;
  */
 public class TicketService {
 	@Inject
-	private CacheWrapper cache;
+	private CacheWrapper<Serializable, Serializable> cache;
 	private GrantTicketDAO gtdao;
 
 	@Inject
@@ -57,11 +60,13 @@ public class TicketService {
 	 * @return
 	 */
 	public String verifyTGT(String tgtId) {
-		GrantTicket gt = gtdao.find(tgtId);
+//		GrantTicket gt = gtdao.find(tgtId);
+		// 暂时从缓存中取出相应的数据
+		Object gt =cache.get(tgtId);
 		if (gt == null) {
 			return null;
 		}
-		return gt.getTicket();
+		return ((GrantTicket)gt).getTicket();
 	}
 
 	/**
@@ -90,8 +95,10 @@ public class TicketService {
 	 * @return
 	 */
 	public String generateST(String appId, String service) {
-		String st = DigestUtils.md5Hex(appId + "|" + service + "|" + new Date().getTime());
-		cache.put(st, appId + "|" + service + "|");
+		String encryptContent = appId + "|" + service + "|" + new Date().getTime();
+		TeaCryptor cry = new TeaCryptor();
+		String st = BASE64Coding.encode(cry.encrypt(encryptContent.getBytes(), GlobalConfig.get("key").getBytes()));
+		cache.put(st, encryptContent);
 		return st;
 	}
 
@@ -107,9 +114,22 @@ public class TicketService {
 		if (obj == null) {
 			return null;
 		} else {
-			cache.remove(appId);
-			String newTicket = generateST(appId, service);
-			return newTicket;
+			TeaCryptor cry = new TeaCryptor();
+			byte [] bs = BASE64Coding.decode(ticket);
+			if (bs == null) {
+				return null;
+			}
+			byte[] bs2 = cry.decrypt(bs, GlobalConfig.get("key").getBytes());
+			if (bs2 == null) {
+				return null;
+			}
+			String encryptContent = new String(bs2);
+			if (encryptContent.equals(String.valueOf(obj))) {
+				cache.remove(appId);
+				return generateST(appId, service);
+			}
+
+			return null;
 		}
 	}
 }
