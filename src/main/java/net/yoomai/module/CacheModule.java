@@ -11,6 +11,7 @@ import net.sf.ehcache.CacheManager;
 import net.yoomai.cache.CacheWrapper;
 import net.yoomai.cache.EhcacheWrapper;
 import net.yoomai.config.GlobalConfig;
+import net.yoomai.module.annotation.CM;
 
 /**
  * @(#)CacheModule.java 1.0 18/09/2012

@@ -2,7 +2,7 @@
  * Copyright (c) 2011, yoomai.net. All rights reserved.
  * yoomai.cn. Use is subject to license terms.
  */
-package net.yoomai.module;
+package net.yoomai.module.annotation;
 
 import com.google.inject.BindingAnnotation;
 

@@ -9,7 +9,7 @@ import com.google.inject.name.Named;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
-import net.yoomai.module.CM;
+import net.yoomai.module.annotation.CM;
 
 /**
  * @(#)EhcacheWrapper.java 1.0 18/09/2012

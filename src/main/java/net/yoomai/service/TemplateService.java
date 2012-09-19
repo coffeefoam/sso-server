@@ -5,8 +5,6 @@
 package net.yoomai.service;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
-import net.yoomai.YoomaiContext;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -23,16 +21,11 @@ import java.util.Map;
 public class TemplateService {
 	@Inject
 	private VelocityEngine engine;
-	@Inject @Named("encode")
-	private String encoding;
-	@Inject @Named("path")
-	private String resourcePath;
 
 	public TemplateService() {
 	}
 
 	public String paint(Map<String, Object> params, String templatePath) {
-		init();
 		VelocityContext context = new VelocityContext();
 		if (params != null) {
 			Iterator keys = params.keySet().iterator();
@@ -52,12 +45,5 @@ public class TemplateService {
 		}
 
 		return w.toString();
-	}
-
-
-	private void init() {
-		engine.setProperty(VelocityEngine.INPUT_ENCODING, encoding);
-		engine.setProperty(VelocityEngine.OUTPUT_ENCODING, encoding);
-		engine.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, YoomaiContext.getApplicationPath() + "/" + resourcePath);
 	}
 }
