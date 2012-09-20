@@ -113,15 +113,14 @@ public class TicketService {
 	 * @return
 	 */
 	public String verifyST(String appId, String service, String ticket) throws UnsupportedEncodingException {
-
 		Object obj = cache.get(ticket);
 		if (obj == null) {
 			return null;
 		} else {
 			TeaCryptor cry = new TeaCryptor();
 
-			ticket = URLDecoder.decode(ticket, "UTF-8");
-			byte [] bs = BASE64Coding.decode(ticket);
+			String st = URLDecoder.decode(ticket, "UTF-8");
+			byte [] bs = BASE64Coding.decode(st);
 			if (bs == null) {
 				return null;
 			}
