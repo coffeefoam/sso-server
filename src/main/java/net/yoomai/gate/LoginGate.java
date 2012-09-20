@@ -54,6 +54,7 @@ public class LoginGate extends AbstractGate {
 				Cookie cookie = new Cookie("_id_", String.valueOf(gt.getUid()));
 				response.addCookie(cookie);
 				response.sendRedirect("/auth?" + makeParamURL(request));
+				return;
 			}
 		} else {
 			// 显示登录界面

@@ -10,6 +10,7 @@
 	<input type="hidden" name="action" value="signin" />
 	<input type="hidden" name="app" value="$app" />
 	<input type="hidden" name="service" value="$service" />
+	<input type="hidden" name="back" value="$back" />
 	<input type="submit" value="SUBMIT" />
 	</form>
 </body>
