@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 /**
  * @(#)AuthGate.java 1.0 11/09/2012
@@ -67,6 +68,7 @@ public class AuthGate extends AbstractGate {
 		}
 
 		String p = makeParamURL(request);
+
 		response.sendRedirect(redirect + "?" + p + "st=" + st);
 		return;
 	}
@@ -77,7 +79,7 @@ public class AuthGate extends AbstractGate {
 		String service = NetUtil.getStringParameter(request, "service", "");
 		// 这是在进行点对点验证的情况下，才会进行service ticket的接收，接下来就是进行st的验证
 		// 当验证成功后，会返回新的st串；若没成功，则会返回空串
-		String ticket = NetUtil.getStringParameter(request, "st", "");
+		String ticket = URLEncoder.encode(NetUtil.getStringParameter(request, "st", ""), "UTF-8");
 
 		String token = ticketService.verifyST(app, service, ticket);
 		response.getWriter().write(token);

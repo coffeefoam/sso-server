@@ -15,6 +15,9 @@ import net.yoomai.util.TeaCryptor;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.Cookie;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Date;
 
 /**
@@ -94,10 +97,10 @@ public class TicketService {
 	 * @param appId
 	 * @return
 	 */
-	public String generateST(String appId, String service) {
+	public String generateST(String appId, String service) throws UnsupportedEncodingException {
 		String encryptContent = appId + "|" + service + "|" + new Date().getTime();
 		TeaCryptor cry = new TeaCryptor();
-		String st = BASE64Coding.encode(cry.encrypt(encryptContent.getBytes(), GlobalConfig.get("key").getBytes()));
+		String st = URLEncoder.encode(BASE64Coding.encode(cry.encrypt(encryptContent.getBytes(), GlobalConfig.get("key").getBytes())), "UTF-8");
 		cache.put(st, encryptContent);
 		return st;
 	}
@@ -109,12 +112,15 @@ public class TicketService {
 	 * @param appId
 	 * @return
 	 */
-	public String verifyST(String appId, String service, String ticket) {
+	public String verifyST(String appId, String service, String ticket) throws UnsupportedEncodingException {
+
 		Object obj = cache.get(ticket);
 		if (obj == null) {
 			return null;
 		} else {
 			TeaCryptor cry = new TeaCryptor();
+
+			ticket = URLDecoder.decode(ticket, "UTF-8");
 			byte [] bs = BASE64Coding.decode(ticket);
 			if (bs == null) {
 				return null;
@@ -125,7 +131,7 @@ public class TicketService {
 			}
 			String encryptContent = new String(bs2);
 			if (encryptContent.equals(String.valueOf(obj))) {
-				cache.remove(appId);
+				cache.remove(ticket);
 				return generateST(appId, service);
 			}
 
