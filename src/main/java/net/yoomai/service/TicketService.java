@@ -96,7 +96,6 @@ public class TicketService {
 	 */
 	public String generateST(String appId, String service) {
 		String encryptContent = appId + "|" + service + "|" + new Date().getTime();
-		System.out.println("encrypt content:" + encryptContent);
 		TeaCryptor cry = new TeaCryptor();
 		String st = BASE64Coding.encode(cry.encrypt(encryptContent.getBytes(), GlobalConfig.get("key").getBytes()));
 		cache.put(st, encryptContent);
