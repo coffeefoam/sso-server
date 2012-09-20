@@ -21,7 +21,7 @@ public class CacheModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(String.class).annotatedWith(Names.named("cachename")).toInstance(GlobalConfig.get("cache"));
-		bind(CacheWrapper.class).to(EhcacheWrapper.class);
+		bind(CacheWrapper.class).to(EhcacheWrapper.class).asEagerSingleton();
 	}
 
 	@Provides @CM

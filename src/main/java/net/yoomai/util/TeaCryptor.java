@@ -6,8 +6,6 @@
  */
 package net.yoomai.util;
 
-import cn.com.opensource.crypto.BASE64Coding;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -19,7 +17,6 @@ import java.util.Random;
  * @since 1.5
  */
 public class TeaCryptor {
-
 	public static final int QUOTIENT = 0x04c11db7;
 
 	public static final int SALT_LEN = 2;
@@ -114,6 +111,40 @@ public class TeaCryptor {
 
 		int result = (v[1] << 16 | (v[0] & 0xffff));
 		return result;
+
+		//	        byte [] rt = new byte[4];
+		//	        rt[0] = (byte)(z >> 8);
+		//	        rt[1] = (byte)(z & 0xff);
+		//	        rt[2] = (byte)(y >> 8);
+		//	        rt[3] = (byte)(y & 0xff);
+		//
+		//	        long result = 0;
+		//	        long temp = 0;
+		//	        temp = (long)rt[0];
+		//	        if( temp < 0 )
+		//	            temp = (long)( 256 + temp );
+		//	        result = temp;
+		//	        result = result << 8 ;
+		//
+		//	        temp = (long)rt[1];
+		//	        if( temp < 0 )
+		//	            temp = (long)( 256 + temp );
+		//	        result += temp;
+		//	        result = result << 8;
+		//
+		//	        temp = (long)rt[2];
+		//	        if( temp < 0 )
+		//	            temp = (long)( 256 + temp );
+		//	        result += temp;
+		//	        result = result << 8;
+		//
+		//	        temp = (long)rt[3];
+		//	        if( temp < 0 )
+		//	            temp = (long)( 256 + temp );
+		//	        result += temp;
+		//
+		//	        int returnValue = (int)( result & 0xffffffff);
+		//	        return returnValue;
 	}
 
 	/**

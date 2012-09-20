@@ -8,7 +8,6 @@ import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.UnitOfWork;
 import net.yoomai.gate.AuthGate;
 import net.yoomai.gate.LoginGate;
-import net.yoomai.gate.STGate;
 import net.yoomai.gate.WelcomeGate;
 import net.yoomai.module.CacheModule;
 import net.yoomai.module.DBModule;
@@ -43,7 +42,6 @@ public class YoomaiContext extends GuiceServletContextListener {
 				@Override
 				protected void configureServlets() {
 					serve("/auth").with(AuthGate.class);
-					serve("/st").with(STGate.class);
 					serve("/login").with(LoginGate.class);
 					serve("/welcome").with(WelcomeGate.class);
 				}

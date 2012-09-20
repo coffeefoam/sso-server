@@ -15,12 +15,9 @@ import net.yoomai.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @(#)LoginGate.java 1.0 18/09/2012
@@ -28,7 +25,7 @@ import java.util.Map;
  * 负责登陆页面显示，登录处理等逻辑转向
  */
 @Singleton
-public class LoginGate extends HttpServlet {
+public class LoginGate extends AbstractGate {
 	@Inject
 	private TemplateService templateService;
 	@Inject
@@ -40,8 +37,6 @@ public class LoginGate extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = NetUtil.getStringParameter(request, "action", "");
-		String appId = NetUtil.getStringParameter(request, "app", "");
-		String back = NetUtil.getStringParameter(request, "back", "");
 
 		if ("signin".equals(action)) {
 			// 处理登录请求
@@ -51,19 +46,18 @@ public class LoginGate extends HttpServlet {
 			User user = userService.auth(uid, password);
 
 			if (user == null) {
-				response.sendRedirect("/login");
+				response.sendRedirect("/login?" + makeParamURL(request));
 			} else {
 				// 登录成功，分配一个有效的TGT，后重定向到/auth
 			    GrantTicket gt = ticketService.generateTGT(user, request.getRemoteAddr());
+
 				Cookie cookie = new Cookie("_id_", String.valueOf(gt.getUid()));
 				response.addCookie(cookie);
-				response.sendRedirect("/auth?app=" + appId + "&back=" + back);
+				response.sendRedirect("/auth?" + makeParamURL(request));
 			}
 		} else {
-			Map params = new HashMap();
-			params.put("app", appId);
 			// 显示登录界面
-	 	    response.getWriter().write(templateService.paint(params, "login"));
+	 	    response.getWriter().write(templateService.paint(makeParamMap(request), "login"));
 		}
 	}
 }

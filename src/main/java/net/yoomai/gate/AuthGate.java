@@ -7,13 +7,9 @@ import net.yoomai.service.TicketService;
 import net.yoomai.service.UserService;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * @(#)AuthGate.java 1.0 11/09/2012
@@ -27,7 +23,7 @@ import java.util.Map;
  * 重定向给用户的地址是 s=A&st=1q2w3e4r
  */
 @Singleton
-public class AuthGate extends HttpServlet {
+public class AuthGate extends AbstractGate {
 	@Inject
 	private UserService service;
 	@Inject
@@ -54,18 +50,15 @@ public class AuthGate extends HttpServlet {
 			return;
 		}
 
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("app", appId);
-		params.put("service", service);
-		params.put("back", back);
-
+		String st = "";
 		String _tgt_id = ticketService.verifyTGT(request.getCookies());
+
 		if (_tgt_id != null) {
 			String ticket = ticketService.verifyTGT(_tgt_id);
+
 			if (ticket != null) {
 				// 分配相应的ST，然后跳转
-				String st = ticketService.generateST(appId, service);
-				params.put("st", st);
+				st = ticketService.generateST(appId, service);
 			} else {
 				redirect = "/login";
 			}
@@ -73,8 +66,8 @@ public class AuthGate extends HttpServlet {
 			redirect = "/login";
 		}
 
-		String p = makeRedirectParams(params);
-		response.sendRedirect(redirect + "?" + p);
+		String p = makeParamURL(request);
+		response.sendRedirect(redirect + "?" + p + "st=" + st);
 		return;
 	}
 
@@ -88,20 +81,5 @@ public class AuthGate extends HttpServlet {
 
 		String token = ticketService.verifyST(app, service, ticket);
 		response.getWriter().write(token);
-	}
-
-	private String makeRedirectParams(Map<String, String> params) {
-		StringBuffer buffer = new StringBuffer();
-
-		Iterator<String> keys = params.keySet().iterator();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			String value = params.get(key);
-
-			buffer.append(key + "=" + value);
-			buffer.append("&");
-		}
-
-		return buffer.toString();
 	}
 }

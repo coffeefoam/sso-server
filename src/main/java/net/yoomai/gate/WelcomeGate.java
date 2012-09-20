@@ -24,6 +24,7 @@ public class WelcomeGate extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		response.getWriter().write(templateService.paint(null, "welcome"));
 		response.getWriter().close();
 	}

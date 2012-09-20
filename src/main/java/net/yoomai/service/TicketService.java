@@ -12,9 +12,9 @@ import net.yoomai.db.GrantTicketDAO;
 import net.yoomai.model.GrantTicket;
 import net.yoomai.model.User;
 import net.yoomai.util.TeaCryptor;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.Cookie;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -24,7 +24,7 @@ import java.util.Date;
  */
 public class TicketService {
 	@Inject
-	private CacheWrapper<Serializable, Serializable> cache;
+	private CacheWrapper cache;
 	private GrantTicketDAO gtdao;
 
 	@Inject
@@ -62,7 +62,7 @@ public class TicketService {
 	public String verifyTGT(String tgtId) {
 //		GrantTicket gt = gtdao.find(tgtId);
 		// 暂时从缓存中取出相应的数据
-		Object gt =cache.get(tgtId);
+		Object gt =cache.get(Long.valueOf(tgtId));
 		if (gt == null) {
 			return null;
 		}
@@ -79,7 +79,7 @@ public class TicketService {
 		GrantTicket gt = new GrantTicket();
 		gt.setLastIp(ip);
 		gt.setLastTime(new Date());
-		gt.setTicket(user.getUid() + "|" + ip);
+		gt.setTicket(DigestUtils.md5Hex(user.getUid() + "|" + ip));
 		gt.setUid(user.getUid());
 		gt.setSid("");
 
@@ -96,6 +96,7 @@ public class TicketService {
 	 */
 	public String generateST(String appId, String service) {
 		String encryptContent = appId + "|" + service + "|" + new Date().getTime();
+		System.out.println("encrypt content:" + encryptContent);
 		TeaCryptor cry = new TeaCryptor();
 		String st = BASE64Coding.encode(cry.encrypt(encryptContent.getBytes(), GlobalConfig.get("key").getBytes()));
 		cache.put(st, encryptContent);

@@ -34,6 +34,7 @@ public class EhcacheWrapper<K, V> implements CacheWrapper<K, V> {
 
 	public V get(final K key) {
 		Element element = getCache().get(key);
+
 		if (element != null) {
 			return (V) element.getValue();
 		}
@@ -41,6 +42,8 @@ public class EhcacheWrapper<K, V> implements CacheWrapper<K, V> {
 	}
 
 	public Ehcache getCache() {
+		Element element = cacheManager.getCache(cacheName).get(Long.valueOf(68743));
+		System.out.println(cacheManager.getCache(cacheName).getSize() + ":" + element);
 		return cacheManager.getEhcache(cacheName);
 	}
 }

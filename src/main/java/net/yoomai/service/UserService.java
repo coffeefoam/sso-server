@@ -28,7 +28,7 @@ public class UserService {
 	 */
 	public User auth(long uid, String password) {
 		User user = udao.find(uid, password);
-		System.out.println(user);
+
 		return user;
 	}
 }
