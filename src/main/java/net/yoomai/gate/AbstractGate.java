@@ -34,7 +34,7 @@ public class AbstractGate extends HttpServlet {
 		Enumeration enumeration = request.getParameterNames();
 		while (enumeration.hasMoreElements()) {
 			String paramName = (String) enumeration.nextElement();
-			if ("action".equals(paramName) || "password".equals(paramName)) {
+			if ("action".equals(paramName) || "password".equals(paramName) || "uid".equals(paramName)) {
 				continue;
 			}
 			String paramValue = NetUtil.getStringParameter(request, paramName, "");
