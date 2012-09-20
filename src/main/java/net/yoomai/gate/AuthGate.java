@@ -51,10 +51,10 @@ public class AuthGate extends AbstractGate {
 		}
 
 		String st = "";
-		String _tgt_id = ticketService.verifyTGT(request.getCookies());
+		String _uid = ticketService.verifyTGT(request.getCookies());
 
-		if (_tgt_id != null) {
-			String ticket = ticketService.verifyTGT(_tgt_id);
+		if (_uid != null) {
+			String ticket = ticketService.verifyTGT(_uid);
 
 			if (ticket != null) {
 				// 分配相应的ST，然后跳转

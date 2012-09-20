@@ -56,13 +56,13 @@ public class TicketService {
 	/**
 	 * 第二步，验证库里是否存在真实的ticket标识，如果有，则返回真实的ticket，如果没有，则返回null
 	 *
-	 * @param tgtId
+	 * @param uid
 	 * @return
 	 */
-	public String verifyTGT(String tgtId) {
+	public String verifyTGT(String uid) {
 //		GrantTicket gt = gtdao.find(tgtId);
 		// 暂时从缓存中取出相应的数据
-		Object gt =cache.get(Long.valueOf(tgtId));
+		Object gt =cache.get(Long.valueOf(uid));
 		if (gt == null) {
 			return null;
 		}
