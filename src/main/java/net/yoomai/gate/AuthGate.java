@@ -3,6 +3,7 @@ package net.yoomai.gate;
 import cn.com.opensource.net.NetUtil;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import net.yoomai.service.TemplateService;
 import net.yoomai.service.TicketService;
 import net.yoomai.service.UserService;
 
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @(#)AuthGate.java 1.0 11/09/2012
@@ -29,6 +32,8 @@ public class AuthGate extends AbstractGate {
 	private UserService service;
 	@Inject
 	private TicketService ticketService;
+	@Inject
+	private TemplateService templateService;
 
 
 	@Override
@@ -82,10 +87,15 @@ public class AuthGate extends AbstractGate {
 		String ticket = URLEncoder.encode(NetUtil.getStringParameter(request, "st", ""), "UTF-8");
 
 		String token = ticketService.verifyST(app, service, ticket);
+		Map results = new HashMap();
 		if (token == null) {
-			response.getWriter().write("null");
+			results.put("verify", "false");
 		} else {
-			response.getWriter().write(token);
+			results.put("verify", "true");
 		}
+
+		results.put("st", token);
+
+		response.getWriter().write(templateService.paint(results, "ticket"));
 	}
 }
