@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
 <sso>
 	<verify>$verify</verify>
-	<ticket>$st</ticket>
+	<ticket>#if($st)$st#end</ticket>
 	<user>
 
 	</user>
