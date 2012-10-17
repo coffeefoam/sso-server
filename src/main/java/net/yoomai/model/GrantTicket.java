@@ -12,7 +12,9 @@ import java.util.Date;
  *
  * TGT的数据结构
  */
-public class GrantTicket implements Serializable {
+public class GrantTicket implements Serializable, Cloneable {
+	private static final long serialVersionUID = -703990048660105471L;
+
 	private long uid;
 	private String sid;
 	private String ticket;

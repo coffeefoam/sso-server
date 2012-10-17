@@ -15,7 +15,9 @@ import java.util.Date;
  * @version 1.0, 12/09/2012
  * @since 1.5
  */
-public class User implements Serializable {
+public class User implements Serializable, Cloneable {
+	private static final long serialVersionUID = 9041423500127665564L;
+
 	private long uid;
 	private String password;
 

@@ -102,6 +102,7 @@ public class TicketService {
 		TeaCryptor cry = new TeaCryptor();
 		String st = URLEncoder.encode(BASE64Coding.encode(cry.encrypt(encryptContent.getBytes(), GlobalConfig.get("key").getBytes())), "UTF-8");
 		cache.put(st, encryptContent);
+		cache.put("me", "yulei");
 		return st;
 	}
 
