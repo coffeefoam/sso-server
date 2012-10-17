@@ -69,7 +69,8 @@ public class TicketService {
 		if (gt == null) {
 			return null;
 		}
-		return ((GrantTicket)gt).getTicket();
+//		return ((GrantTicket)gt).getTicket();
+		return (String) gt;
 	}
 
 	/**
@@ -86,7 +87,7 @@ public class TicketService {
 		gt.setUid(user.getUid());
 		gt.setSid("");
 
-		cache.put(user.getUid(), gt);
+		cache.put(user.getUid(), gt.getTicket());
 
 		return gt;
 	}
@@ -102,7 +103,6 @@ public class TicketService {
 		TeaCryptor cry = new TeaCryptor();
 		String st = URLEncoder.encode(BASE64Coding.encode(cry.encrypt(encryptContent.getBytes(), GlobalConfig.get("key").getBytes())), "UTF-8");
 		cache.put(st, encryptContent);
-		cache.put("me", "yulei");
 		return st;
 	}
 
