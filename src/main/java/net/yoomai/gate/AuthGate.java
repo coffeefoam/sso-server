@@ -6,6 +6,7 @@ import com.google.inject.Singleton;
 import net.yoomai.service.TemplateService;
 import net.yoomai.service.TicketService;
 import net.yoomai.service.UserService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,9 @@ public class AuthGate extends AbstractGate {
 	private TicketService ticketService;
 	@Inject
 	private TemplateService templateService;
+
+	/* log configuration */
+	private Logger log = Logger.getLogger(AuthGate.class);
 
 
 	@Override
@@ -64,16 +68,21 @@ public class AuthGate extends AbstractGate {
 
 			if (ticket != null) {
 				// 分配相应的ST，然后跳转
+				log.debug("TGT be found [" + ticket + "]");
+				log.debug("After TGT found, we will generate new service ticket for you, baby.");
 				st = ticketService.generateST(appId, service);
 			} else {
+				log.debug("Sorry, baby. we can't find TGT. Now, you should redirect login page.");
 				redirect = "/login";
 			}
 		} else {
+			log.debug("Fuck, you are not login.");
 			redirect = "/login";
 		}
 
 		String p = makeParamURL(request);
 
+		log.debug("All right, auth end. service tikect is [" + st + "]");
 		response.sendRedirect(redirect + "?" + p + "st=" + st);
 		return;
 	}
@@ -86,6 +95,7 @@ public class AuthGate extends AbstractGate {
 		// 当验证成功后，会返回新的st串；若没成功，则会返回空串
 		String ticket = URLEncoder.encode(NetUtil.getStringParameter(request, "st", ""), "UTF-8");
 
+		log.debug("I will verify service ticket.");
 		String token = ticketService.verifyST(app, service, ticket);
 		Map results = new HashMap();
 		if (token == null) {

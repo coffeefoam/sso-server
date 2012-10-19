@@ -12,6 +12,7 @@ import net.yoomai.gate.WelcomeGate;
 import net.yoomai.module.CacheModule;
 import net.yoomai.module.DBModule;
 import net.yoomai.module.TemplateModule;
+import org.apache.log4j.PropertyConfigurator;
 
 import javax.servlet.ServletContextEvent;
 
@@ -29,6 +30,7 @@ public class YoomaiContext extends GuiceServletContextListener {
 		super.contextInitialized(event);
 
 		path = event.getServletContext().getRealPath("/");
+		PropertyConfigurator.configure(path + "WEB-INF/classes/log4j.properties");
 	}
 
 	@Override

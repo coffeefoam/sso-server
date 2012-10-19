@@ -4,21 +4,19 @@
  */
 package net.yoomai.service;
 
-import cn.com.opensource.crypto.BASE64Coding;
 import com.google.inject.Inject;
 import net.yoomai.cache.CacheWrapper;
-import net.yoomai.config.GlobalConfig;
 import net.yoomai.db.GrantTicketDAO;
 import net.yoomai.model.GrantTicket;
 import net.yoomai.model.User;
-import net.yoomai.util.TeaCryptor;
+import net.yoomai.util.StringUtils;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.Cookie;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.Date;
+
 
 /**
  * @(#)TickitService.java 1.0 14/09/2012
@@ -29,6 +27,8 @@ public class TicketService {
 	@Inject
 	private CacheWrapper cache;
 	private GrantTicketDAO gtdao;
+
+	private Logger log = Logger.getLogger(TicketService.class);
 
 	@Inject
 	public TicketService(GrantTicketDAO gtdao) {
@@ -99,10 +99,12 @@ public class TicketService {
 	 * @return
 	 */
 	public String generateST(String appId, String service) throws UnsupportedEncodingException {
-		String encryptContent = appId + "|" + service + "|" + new Date().getTime();
-		TeaCryptor cry = new TeaCryptor();
-		String st = URLEncoder.encode(BASE64Coding.encode(cry.encrypt(encryptContent.getBytes(), GlobalConfig.get("key").getBytes())), "UTF-8");
+		String encryptContent = appId + "|" + service + "|" + StringUtils.getUniqueID(8);
+//		TeaCryptor cry = new TeaCryptor();
+//		String st = URLEncoder.encode(BASE64Coding.encode(cry.encrypt(encryptContent.getBytes(), GlobalConfig.get("key").getBytes())), "UTF-8");
+		String st = StringUtils.MD5(encryptContent);
 		cache.put(st, encryptContent);
+		log.debug("I put service ticket [" + st + "] into cache yet.");
 		return st;
 	}
 
@@ -114,28 +116,15 @@ public class TicketService {
 	 * @return
 	 */
 	public String verifyST(String appId, String service, String ticket) throws UnsupportedEncodingException {
+		log.debug(ticket + " will be verify.");
+
 		Object obj = cache.get(ticket);
 		if (obj == null) {
+			log.debug("Sorry, service ticket [" + ticket + "] is not in cache, fuck.");
 			return null;
 		} else {
-			TeaCryptor cry = new TeaCryptor();
-
-			String st = URLDecoder.decode(ticket, "UTF-8");
-			byte [] bs = BASE64Coding.decode(st);
-			if (bs == null) {
-				return null;
-			}
-			byte[] bs2 = cry.decrypt(bs, GlobalConfig.get("key").getBytes());
-			if (bs2 == null) {
-				return null;
-			}
-			String encryptContent = new String(bs2);
-			if (encryptContent.equals(String.valueOf(obj))) {
-				cache.remove(ticket);
-				return generateST(appId, service);
-			}
-
-			return null;
+			cache.remove(ticket);
+			return generateST(appId, service);
 		}
 	}
 }
