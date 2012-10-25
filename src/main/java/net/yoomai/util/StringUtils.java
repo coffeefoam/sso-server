@@ -30,7 +30,7 @@ public class StringUtils {
     }
 
     /**
-     * é€šç”¨MD5åŠ å¯†
+     * Í¨ÓÃMD5¼ÓÃÜ
      *
      * @param s
      * @return
@@ -59,7 +59,7 @@ public class StringUtils {
     }
 
     /**
-     * å°†å­—èŠ‚æ•°ç»„è½¬æ¢æˆ16è¿›åˆ¶å­—ç¬¦ä¸²
+     * ½«×Ö½ÚÊı×é×ª»»³É16½øÖÆ×Ö·û´®
      *
      * @param b
      * @return
@@ -74,7 +74,7 @@ public class StringUtils {
     }
 
     /**
-     * å°†å­—ç¬¦ä¸²è½¬æ¢æˆ16è¿›åˆ¶å­—èŠ‚
+     * ½«×Ö·û´®×ª»»³É16½øÖÆ×Ö½Ú
      *
      * @param s
      * @return
@@ -90,12 +90,12 @@ public class StringUtils {
     }
 
     /**
-     * å­—ç¬¦ä¸²ç¼–ç è½¬æ¢
+     * ×Ö·û´®±àÂë×ª»»
      *
-     * @param str  å¾…è½¬çš„å­—ç¬¦ä¸²
-     * @param from å­—ç¬¦ä¸²è½¬ç ä¹‹å‰çš„ç¼–ç 
-     * @param to   å­—ç¬¦ä¸²è½¬ç ä¹‹åçš„ç¼–ç 
-     * @return è½¬ç åçš„å­—ç¬¦ä¸²
+     * @param str  ´ı×ªµÄ×Ö·û´®
+     * @param from ×Ö·û´®×ªÂëÖ®Ç°µÄ±àÂë
+     * @param to   ×Ö·û´®×ªÂëÖ®ºóµÄ±àÂë
+     * @return ×ªÂëºóµÄ×Ö·û´®
      */
     public static String iconv(String str, String from, String to) {
         String value;
@@ -112,10 +112,10 @@ public class StringUtils {
     }
 
     /**
-     * äº§ç”Ÿè‹¥å¹²ä½éšæœºæ•°å­—ç¬¦ä¸²
+     * ²úÉúÈô¸ÉÎ»Ëæ»úÊı×Ö·û´®
      *
-     * @param len éšæœºæ•°ä½æ•°
-     * @return éšæœºæ•°
+     * @param len Ëæ»úÊıÎ»Êı
+     * @return Ëæ»úÊı
      */
     public static synchronized String getUniqueID(int len) {
         if (len < 1) return null;
@@ -132,13 +132,13 @@ public class StringUtils {
     }
 
     /**
-     * æä¾›æˆªå–å­—ç¬¦ä¸²éƒ¨åˆ†ä¿¡æ¯
+     * Ìá¹©½ØÈ¡×Ö·û´®²¿·ÖĞÅÏ¢
      *
-     * @param original   å¾…æˆªå–çš„å­—ç¬¦ä¸²
-     * @param split      æˆªå–æ—¶çš„åˆ†éš”ç¬¦
-     * @param index      éœ€è¦ä¿¡æ¯æ‰€å¯¹åº”çš„ç´¢å¼•
-     * @param nullString æä¾›é»˜è®¤å€¼
-     * @return æˆªå–åçš„ä¿¡æ¯
+     * @param original   ´ı½ØÈ¡µÄ×Ö·û´®
+     * @param split      ½ØÈ¡Ê±µÄ·Ö¸ô·û
+     * @param index      ĞèÒªĞÅÏ¢Ëù¶ÔÓ¦µÄË÷Òı
+     * @param nullString Ìá¹©Ä¬ÈÏÖµ
+     * @return ½ØÈ¡ºóµÄĞÅÏ¢
      */
     public static String split(String original, String split, int index, String nullString) {
         String ret = nullString;
@@ -151,7 +151,7 @@ public class StringUtils {
     }
 
     /**
-     * ç»™å­—ç¬¦ä¸²ä¸è¶³ç›¸åº”ä½æ•°æ—¶å·¦è¾¹è¡¥ä½
+     * ¸ø×Ö·û´®²»×ãÏàÓ¦Î»ÊıÊ±×ó±ß²¹Î»
      */
     public static String leftPadding(String orgStr, String addStr, int strLength) {
         if (orgStr.length() < strLength) {

@@ -1,9 +1,3 @@
-/*
- * Created by IntelliJ IDEA.
- * User: ray
- * Date: 12-9-18
- * Time: 下午12:18
- */
 package net.yoomai.module;
 
 import com.google.inject.AbstractModule;

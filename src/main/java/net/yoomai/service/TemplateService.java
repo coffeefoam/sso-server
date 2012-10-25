@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * @(#)TemplateService.java 1.0 18/09/2012
  * <p/>
- * è´Ÿè´£æ¨¡ç‰ˆæ¸²æŸ“
+ * ¸ºÔğÄ£°æäÖÈ¾
  */
 public class TemplateService {
 	@Inject

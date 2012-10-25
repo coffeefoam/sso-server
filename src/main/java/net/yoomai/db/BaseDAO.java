@@ -7,6 +7,7 @@ package net.yoomai.db;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.wideplay.warp.persist.Transactional;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import java.io.Serializable;
@@ -16,6 +17,8 @@ import java.util.List;
  * @(#)BaseDAO.java 1.0 13/09/2012
  */
 public class BaseDAO<T, PK extends Serializable> {
+	private Logger log = Logger.getLogger(BaseDAO.class);
+
 	@Inject
 	protected Provider<Session> session;
 

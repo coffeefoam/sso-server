@@ -21,7 +21,7 @@ import java.util.Date;
 /**
  * @(#)TickitService.java 1.0 14/09/2012
  * <p/>
- * Ticketç”Ÿæˆå’ŒéªŒè¯çš„æœåŠ¡æ¨¡å—.
+ * TicketÉú³ÉºÍÑéÖ¤µÄ·şÎñÄ£¿é.
  */
 public class TicketService {
 	@Inject
@@ -36,7 +36,7 @@ public class TicketService {
 	}
 
 	/**
-	 * ç¬¬ä¸€æ­¥ï¼ŒéªŒè¯TGTæ˜¯å¦åœ¨cookieä¸­å­˜åœ¨æ ‡è¯†ï¼Œå¦‚æœå­˜åœ¨ï¼Œåˆ™æŠŠæ ‡ç¤ºè¿”å›.
+	 * µÚÒ»²½£¬ÑéÖ¤TGTÊÇ·ñÔÚcookieÖĞ´æÔÚ±êÊ¶£¬Èç¹û´æÔÚ£¬Ôò°Ñ±êÊ¾·µ»Ø.
 	 *
 	 * @param cookies
 	 * @return
@@ -57,14 +57,14 @@ public class TicketService {
 	}
 
 	/**
-	 * ç¬¬äºŒæ­¥ï¼ŒéªŒè¯åº“é‡Œæ˜¯å¦å­˜åœ¨çœŸå®çš„ticketæ ‡è¯†ï¼Œå¦‚æœæœ‰ï¼Œåˆ™è¿”å›çœŸå®çš„ticketï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™è¿”å›null
+	 * µÚ¶ş²½£¬ÑéÖ¤¿âÀïÊÇ·ñ´æÔÚÕæÊµµÄticket±êÊ¶£¬Èç¹ûÓĞ£¬Ôò·µ»ØÕæÊµµÄticket£¬Èç¹ûÃ»ÓĞ£¬Ôò·µ»Ønull
 	 *
 	 * @param uid
 	 * @return
 	 */
 	public String verifyTGT(String uid) {
 //		GrantTicket gt = gtdao.find(tgtId);
-		// æš‚æ—¶ä»ç¼“å­˜ä¸­å–å‡ºç›¸åº”çš„æ•°æ®
+		// ÔİÊ±´Ó»º´æÖĞÈ¡³öÏàÓ¦µÄÊı¾İ
 		Object gt =cache.get(Long.valueOf(uid));
 		if (gt == null) {
 			return null;
@@ -74,7 +74,7 @@ public class TicketService {
 	}
 
 	/**
-	 * ç”Ÿæˆæ–°çš„TGT
+	 * Éú³ÉĞÂµÄTGT
 	 *
 	 * @param user
 	 * @return
@@ -93,7 +93,7 @@ public class TicketService {
 	}
 
 	/**
-	 * æ ¹æ®ç›¸åº”çš„åº”ç”¨ç¼–ç ä¸TGTï¼Œåˆ†é…ç›¸åº”çš„ST
+	 * ¸ù¾İÏàÓ¦µÄÓ¦ÓÃ±àÂëÓëTGT£¬·ÖÅäÏàÓ¦µÄST
 	 *
 	 * @param appId
 	 * @return
@@ -110,7 +110,7 @@ public class TicketService {
 
 
 	/**
-	 * éªŒè¯STï¼ŒæˆåŠŸè¿”å›æ–°çš„ticketï¼Œå¦åˆ™è¿”å›null
+	 * ÑéÖ¤ST£¬³É¹¦·µ»ØĞÂµÄticket£¬·ñÔò·µ»Ønull
 	 *
 	 * @param appId
 	 * @return

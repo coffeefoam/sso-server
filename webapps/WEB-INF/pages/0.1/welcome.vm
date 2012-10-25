@@ -1,11 +1,11 @@
 <html>
 <head>
-	<title>娆㈣繋鏉ュ埌SSO-SERVER</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>欢迎来到SSO-SERVER</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
 </head>
 <body>
 	<H1>
-		娆㈣繋鏉ュ埌SSO-SERVER锛屽鏋滀綘鐪嬪埌杩欎釜椤甸潰锛岃鏄庢偍宸茬粡鐧诲綍鎺堟潈鎴愬姛
+		欢迎来到SSO-SERVER，如果你看到这个页面，说明您已经登录授权成功
 	</H1>
 </body>
 </html>

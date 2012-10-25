@@ -10,9 +10,9 @@ import java.util.Date;
 /**
  * @(#)GrantTicket.java 1.0 14/09/2012
  *
- * TGTçš„æ•°æ®ç»“æ„
+ * TGTµÄÊı¾İ½á¹¹
  */
-public class GrantTicket implements Serializable, Cloneable {
+public class GrantTicket implements Serializable {
 	private static final long serialVersionUID = -703990048660105471L;
 
 	private long uid;

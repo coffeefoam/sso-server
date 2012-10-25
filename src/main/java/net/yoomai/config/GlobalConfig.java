@@ -10,7 +10,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 /**
  * @(#)GlobalConfig.java 1.0 13/09/2012
  * </p>
- * å…¨å±€æ€§é…ç½®æ–‡ä»¶çš„åŠ è½½ä¸è®¾ç½®ã€‚
+ * È«¾ÖĞÔÅäÖÃÎÄ¼şµÄ¼ÓÔØÓëÉèÖÃ¡£
  */
 public class GlobalConfig {
   	private static PropertiesConfiguration configuration;

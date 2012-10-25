@@ -19,13 +19,13 @@ import java.util.Map;
 /**
  * @(#)AuthGate.java 1.0 11/09/2012
  * <p/>
- * è¿™æ˜¯ä¸€ä¸ªç”¨æˆ·ä¿¡æ¯éªŒè¯çš„å…¥å£
- * å½“ç”¨æˆ·è¢«å®¢æˆ·ç«¯é‡å®šå‘åˆ°è¿™ä¸ªåœ°å€çš„æ—¶å€™ï¼Œéœ€è¦å¯¹cookieè¿›è¡Œæ£€æµ‹ï¼Œçœ‹æ˜¯å¦å­˜åœ¨ä¸€ä¸ªç›¸å…³çš„TGTç¥¨æ®ä¿¡æ¯
- * å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿›è¡Œç™»å½•éªŒè¯ï¼›å¦‚æœå­˜åœ¨ï¼Œåˆ™å¯¹è¯·æ±‚çš„STè¿›è¡Œç”Ÿæˆ
+ * ÕâÊÇÒ»¸öÓÃ»§ĞÅÏ¢ÑéÖ¤µÄÈë¿Ú
+ * µ±ÓÃ»§±»¿Í»§¶ËÖØ¶¨Ïòµ½Õâ¸öµØÖ·µÄÊ±ºò£¬ĞèÒª¶Ôcookie½øĞĞ¼ì²â£¬¿´ÊÇ·ñ´æÔÚÒ»¸öÏà¹ØµÄTGTÆ±¾İĞÅÏ¢
+ * Èç¹û²»´æÔÚ£¬Ôò½øĞĞµÇÂ¼ÑéÖ¤£»Èç¹û´æÔÚ£¬Ôò¶ÔÇëÇóµÄST½øĞĞÉú³É
  * <p/>
  * <p/>
- * ç”¨æˆ·è¯·æ±‚çš„åœ°å€æ˜¯ s=A&back=url
- * é‡å®šå‘ç»™ç”¨æˆ·çš„åœ°å€æ˜¯ s=A&st=1q2w3e4r
+ * ÓÃ»§ÇëÇóµÄµØÖ·ÊÇ s=A&back=url
+ * ÖØ¶¨Ïò¸øÓÃ»§µÄµØÖ·ÊÇ s=A&st=1q2w3e4r
  */
 @Singleton
 public class AuthGate extends AbstractGate {
@@ -43,14 +43,14 @@ public class AuthGate extends AbstractGate {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
-		 * å¿…ä¼ çš„ä¸¤ä¸ªå‚æ•° appå’Œservice
-		 * appæ˜¯åœ¨ssoæ³¨å†Œè¿‡çš„åŸŸåæ‰€åˆ†é…çš„ç¼–å·
-		 * serviceæ˜¯è¯¥åŸŸåä¸‹é¢è¦è¿›è¡ŒæœåŠ¡è®¤è¯çš„æœåŠ¡ä»£ç 
-		 * service ticketæ˜¯æ ¹æ®appå’Œserviceä»¥åŠä¸€ä¸ªæ—¶é—´æˆ³æ¥ç”Ÿæˆ
+		 * ±Ø´«µÄÁ½¸ö²ÎÊı appºÍservice
+		 * appÊÇÔÚsso×¢²á¹ıµÄÓòÃûËù·ÖÅäµÄ±àºÅ
+		 * serviceÊÇ¸ÃÓòÃûÏÂÃæÒª½øĞĞ·şÎñÈÏÖ¤µÄ·şÎñ´úÂë
+		 * service ticketÊÇ¸ù¾İappºÍserviceÒÔ¼°Ò»¸öÊ±¼ä´ÁÀ´Éú³É
 		 */
 		String appId = NetUtil.getStringParameter(request, "app", "");
 		String service = NetUtil.getStringParameter(request, "service", "");
-		// backæ˜¯å®¢æˆ·ç«¯è¦åœ¨è®¤è¯åšå®Œä¹‹åè¿›è¡Œè·³è½¬çš„åœ°å€ï¼Œé»˜è®¤æ˜¯ssoåŸŸåä¸‹é¢çš„welcomeé¡µé¢
+		// backÊÇ¿Í»§¶ËÒªÔÚÈÏÖ¤×öÍêÖ®ºó½øĞĞÌø×ªµÄµØÖ·£¬Ä¬ÈÏÊÇssoÓòÃûÏÂÃæµÄwelcomeÒ³Ãæ
 		String back = NetUtil.getStringParameter(request, "back", "/welcome");
 
 		String redirect = back;
@@ -67,7 +67,7 @@ public class AuthGate extends AbstractGate {
 			String ticket = ticketService.verifyTGT(_uid);
 
 			if (ticket != null) {
-				// åˆ†é…ç›¸åº”çš„STï¼Œç„¶åè·³è½¬
+				// ·ÖÅäÏàÓ¦µÄST£¬È»ºóÌø×ª
 				log.debug("TGT be found [" + ticket + "]");
 				log.debug("After TGT found, we will generate new service ticket for you, baby.");
 				st = ticketService.generateST(appId, service);
@@ -91,8 +91,8 @@ public class AuthGate extends AbstractGate {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String app = NetUtil.getStringParameter(request, "app", "");
 		String service = NetUtil.getStringParameter(request, "service", "");
-		// è¿™æ˜¯åœ¨è¿›è¡Œç‚¹å¯¹ç‚¹éªŒè¯çš„æƒ…å†µä¸‹ï¼Œæ‰ä¼šè¿›è¡Œservice ticketçš„æ¥æ”¶ï¼Œæ¥ä¸‹æ¥å°±æ˜¯è¿›è¡Œstçš„éªŒè¯
-		// å½“éªŒè¯æˆåŠŸåï¼Œä¼šè¿”å›æ–°çš„stä¸²ï¼›è‹¥æ²¡æˆåŠŸï¼Œåˆ™ä¼šè¿”å›ç©ºä¸²
+		// ÕâÊÇÔÚ½øĞĞµã¶ÔµãÑéÖ¤µÄÇé¿öÏÂ£¬²Å»á½øĞĞservice ticketµÄ½ÓÊÕ£¬½ÓÏÂÀ´¾ÍÊÇ½øĞĞstµÄÑéÖ¤
+		// µ±ÑéÖ¤³É¹¦ºó£¬»á·µ»ØĞÂµÄst´®£»ÈôÃ»³É¹¦£¬Ôò»á·µ»Ø¿Õ´®
 		String ticket = URLEncoder.encode(NetUtil.getStringParameter(request, "st", ""), "UTF-8");
 
 		log.debug("I will verify service ticket.");

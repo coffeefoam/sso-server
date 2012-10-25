@@ -22,7 +22,7 @@ import java.io.IOException;
 /**
  * @(#)LoginGate.java 1.0 18/09/2012
  *
- * 璐熻矗鐧婚檰椤甸潰鏄剧ず锛岀櫥褰曞鐞嗙瓑閫昏緫杞悜
+ * 负责登陆页面显示，登录处理等逻辑转向
  */
 @Singleton
 public class LoginGate extends AbstractGate {
@@ -39,7 +39,7 @@ public class LoginGate extends AbstractGate {
 		String action = NetUtil.getStringParameter(request, "action", "");
 
 		if ("signin".equals(action)) {
-			// 澶勭悊鐧诲綍璇锋眰
+			// 处理登录请求
 			long uid = NetUtil.getLongParameter(request, "uid", 0);
 			String password = NetUtil.getStringParameter(request, "password", "");
 
@@ -48,7 +48,7 @@ public class LoginGate extends AbstractGate {
 			if (user == null) {
 				response.sendRedirect("/login?" + makeParamURL(request));
 			} else {
-				// 鐧诲綍鎴愬姛锛屽垎閰嶄竴涓湁鏁堢殑TGT锛屽悗閲嶅畾鍚戝埌/auth
+				// 登录成功，分配一个有效的TGT，后重定向到/auth
 			    GrantTicket gt = ticketService.generateTGT(user, request.getRemoteAddr());
 
 				Cookie cookie = new Cookie("_id_", String.valueOf(gt.getUid()));
@@ -57,7 +57,7 @@ public class LoginGate extends AbstractGate {
 				return;
 			}
 		} else {
-			// 鏄剧ず鐧诲綍鐣岄潰
+			// 显示登录界面
 	 	    response.getWriter().write(templateService.paint(makeParamMap(request), "login"));
 		}
 	}

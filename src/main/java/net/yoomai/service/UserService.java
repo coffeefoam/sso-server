@@ -20,7 +20,7 @@ public class UserService {
 	}
 
 	/**
-	 * ç”¨æˆ·çš„éªŒè¯æ–¹æ³•ã€‚
+	 * ÓÃ»§µÄÑéÖ¤·½·¨¡£
 	 *
 	 * @param uid
 	 * @param password
@@ -28,6 +28,17 @@ public class UserService {
 	 */
 	public User auth(long uid, String password) {
 		User user = udao.find(uid, password);
+
+		return user;
+	}
+
+	/**
+	 * ¸ù¾İÄ³¸öuid»ñÈ¡ÓÃ»§Ïà¹ØĞÅÏ¢£¬È«²¿µÄĞÅÏ¢
+	 * @param uid
+	 * @return
+	 */
+	public User find(long uid) {
+		User user = udao.find(uid);
 
 		return user;
 	}

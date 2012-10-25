@@ -26,6 +26,12 @@ public class UserDAO extends BaseDAO<User, Long> {
 	}
 
 	@Transactional
+	@Finder(query="from User where uid=:uid")
+	public User find(@Named("uid") long uid) {
+		return null;
+	}
+
+	@Transactional
 	@Finder(query = "from User")
 	public List findAllUsers() {
 		throw new AssertionError();
