@@ -4,12 +4,14 @@
  */
 package net.yoomai.gate;
 
+import cn.com.opensource.net.NetUtil;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import net.sf.json.JSONObject;
 import net.yoomai.model.User;
 import net.yoomai.service.TicketService;
 import net.yoomai.service.UserService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,8 @@ import java.io.Writer;
  */
 @Singleton
 public class UserGate extends AbstractGate {
+	private Logger log = Logger.getLogger(UserGate.class);
+
 	@Inject
 	private UserService service;
 	@Inject
@@ -30,14 +34,19 @@ public class UserGate extends AbstractGate {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String _uid = ticketService.verifyTGT(request.getCookies());
+		response.setContentType("text/html;charset=GBK");
+		request.setCharacterEncoding("GBK");
+
+		String st = NetUtil.getStringParameter(request, "st", "");
+		String[] items = ticketService.getItems(st);
+
 		String result = "";
 
-		if (_uid == null || "".equals(_uid)) {
+		if (items == null) {
 			result = "";
 		} else {
-			User user = service.find(Long.parseLong(_uid));
-			System.out.println(new String(user.getUsername().getBytes(), "gbk"));
+			User user = service.find(Long.parseLong(items[2]));
+			log.debug("net broker:" + user.getNetBroker());
 			result = JSONObject.fromObject(user).toString();
 		}
 

@@ -40,7 +40,7 @@ public class YoomaiContext extends GuiceServletContextListener {
 			new DBModule(),
 			new CacheModule(),
 			new TemplateModule(),
-			PersistenceService.usingHibernate().across(UnitOfWork.REQUEST).buildModule(),
+			PersistenceService.usingHibernate().across(UnitOfWork.TRANSACTION).buildModule(),
 			new ServletModule() {
 				@Override
 				protected void configureServlets() {

@@ -12,50 +12,50 @@ import java.io.Serializable;
 public class Shops implements Serializable {
 	private static final long serialVersionUID = -8372786154235024491L;
 
-	private long shopsid;
-	private long departmentsid;
+	private Long shopsid;
+	private Long departmentsid;
 	private String shopname;
 	private String shopaddress;
 	private String shoptel;
 	private String shopmaster;
 	private String shopremark;
-	private long companysid;
-	private long rentsuperintend;
-	private long zhihuansuperintend;
-	private long status;
+	private Long companysid;
+	private Long rentsuperintend;
+	private Long zhihuansuperintend;
+	private Long status;
 	private String othershops;
-	private long shopgroupid;
+	private Long shopgroupid;
 	private String rentbrokers;
 	private String exbrokers;
 	private String apartrentbrokers;
 	private String x;
 	private String y;
-	private int shoptype;
-	private int district;
+	private Integer shoptype;
+	private Integer district;
 	private String linememo;
 	private String opendate;
 	private String closedate;
-	private long isplace;
+	private Long isplace;
 	private String accountno;
-	private long newdeptid;
-	private long physicalshopid;
+	private Long newdeptid;
+	private Long physicalshopid;
 	private String aliascnspell;
 	private String umark;
-	private long hrid;
+	private Long hrid;
 
-	public long getShopsid() {
+	public Long getShopsid() {
 		return shopsid;
 	}
 
-	public void setShopsid(long shopsid) {
+	public void setShopsid(Long shopsid) {
 		this.shopsid = shopsid;
 	}
 
-	public long getDepartmentsid() {
+	public Long getDepartmentsid() {
 		return departmentsid;
 	}
 
-	public void setDepartmentsid(long departmentsid) {
+	public void setDepartmentsid(Long departmentsid) {
 		this.departmentsid = departmentsid;
 	}
 
@@ -99,35 +99,35 @@ public class Shops implements Serializable {
 		this.shopremark = shopremark;
 	}
 
-	public long getCompanysid() {
+	public Long getCompanysid() {
 		return companysid;
 	}
 
-	public void setCompanysid(long companysid) {
+	public void setCompanysid(Long companysid) {
 		this.companysid = companysid;
 	}
 
-	public long getRentsuperintend() {
+	public Long getRentsuperintend() {
 		return rentsuperintend;
 	}
 
-	public void setRentsuperintend(long rentsuperintend) {
+	public void setRentsuperintend(Long rentsuperintend) {
 		this.rentsuperintend = rentsuperintend;
 	}
 
-	public long getZhihuansuperintend() {
+	public Long getZhihuansuperintend() {
 		return zhihuansuperintend;
 	}
 
-	public void setZhihuansuperintend(long zhihuansuperintend) {
+	public void setZhihuansuperintend(Long zhihuansuperintend) {
 		this.zhihuansuperintend = zhihuansuperintend;
 	}
 
-	public long getStatus() {
+	public Long getStatus() {
 		return status;
 	}
 
-	public void setStatus(long status) {
+	public void setStatus(Long status) {
 		this.status = status;
 	}
 
@@ -139,11 +139,11 @@ public class Shops implements Serializable {
 		this.othershops = othershops;
 	}
 
-	public long getShopgroupid() {
+	public Long getShopgroupid() {
 		return shopgroupid;
 	}
 
-	public void setShopgroupid(long shopgroupid) {
+	public void setShopgroupid(Long shopgroupid) {
 		this.shopgroupid = shopgroupid;
 	}
 
@@ -187,19 +187,19 @@ public class Shops implements Serializable {
 		this.y = y;
 	}
 
-	public int getShoptype() {
+	public Integer getShoptype() {
 		return shoptype;
 	}
 
-	public void setShoptype(int shoptype) {
+	public void setShoptype(Integer shoptype) {
 		this.shoptype = shoptype;
 	}
 
-	public int getDistrict() {
+	public Integer getDistrict() {
 		return district;
 	}
 
-	public void setDistrict(int district) {
+	public void setDistrict(Integer district) {
 		this.district = district;
 	}
 
@@ -227,11 +227,11 @@ public class Shops implements Serializable {
 		this.closedate = closedate;
 	}
 
-	public long getIsplace() {
+	public Long getIsplace() {
 		return isplace;
 	}
 
-	public void setIsplace(long isplace) {
+	public void setIsplace(Long isplace) {
 		this.isplace = isplace;
 	}
 
@@ -243,19 +243,19 @@ public class Shops implements Serializable {
 		this.accountno = accountno;
 	}
 
-	public long getNewdeptid() {
+	public Long getNewdeptid() {
 		return newdeptid;
 	}
 
-	public void setNewdeptid(long newdeptid) {
+	public void setNewdeptid(Long newdeptid) {
 		this.newdeptid = newdeptid;
 	}
 
-	public long getPhysicalshopid() {
+	public Long getPhysicalshopid() {
 		return physicalshopid;
 	}
 
-	public void setPhysicalshopid(long physicalshopid) {
+	public void setPhysicalshopid(Long physicalshopid) {
 		this.physicalshopid = physicalshopid;
 	}
 
@@ -275,11 +275,11 @@ public class Shops implements Serializable {
 		this.umark = umark;
 	}
 
-	public long getHrid() {
+	public Long getHrid() {
 		return hrid;
 	}
 
-	public void setHrid(long hrid) {
+	public void setHrid(Long hrid) {
 		this.hrid = hrid;
 	}
 }

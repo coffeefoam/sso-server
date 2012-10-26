@@ -1,7 +1,4 @@
 <sso>
 	<verify>$verify</verify>
 	<ticket>#if($st)$st#end</ticket>
-	<user>
-
-	</user>
 </sso>

@@ -8,7 +8,6 @@ package net.yoomai.model;
 
 import javax.persistence.Transient;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 /**
@@ -66,6 +65,9 @@ public class User implements Serializable {
 	private Long presentstate;
 	private String mobileerp;
 	private Long mobileerpid;
+
+	private NetBroker netBroker;
+	private Shops shops;
 
 	@Transient
 	private String lastIp;
@@ -184,7 +186,7 @@ public class User implements Serializable {
 		this.handset = handset;
 	}
 
-	public String getAddress() throws UnsupportedEncodingException {
+	public String getAddress() {
 		return address;
 	}
 
@@ -462,5 +464,21 @@ public class User implements Serializable {
 
 	public void setLastTime(Date lastTime) {
 		this.lastTime = lastTime;
+	}
+
+	public NetBroker getNetBroker() {
+		return netBroker;
+	}
+
+	public void setNetBroker(NetBroker netBroker) {
+		this.netBroker = netBroker;
+	}
+
+	public Shops getShops() {
+		return shops;
+	}
+
+	public void setShops(Shops shops) {
+		this.shops = shops;
 	}
 }

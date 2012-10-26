@@ -98,8 +98,8 @@ public class TicketService {
 	 * @param appId
 	 * @return
 	 */
-	public String generateST(String appId, String service) throws UnsupportedEncodingException {
-		String encryptContent = appId + "|" + service + "|" + StringUtils.getUniqueID(8);
+	public String generateST(String appId, String service, long uid) throws UnsupportedEncodingException {
+		String encryptContent = appId + "|" + service + "|" + uid + "|" + StringUtils.getUniqueID(8);
 //		TeaCryptor cry = new TeaCryptor();
 //		String st = URLEncoder.encode(BASE64Coding.encode(cry.encrypt(encryptContent.getBytes(), GlobalConfig.get("key").getBytes())), "UTF-8");
 		String st = StringUtils.MD5(encryptContent);
@@ -124,7 +124,26 @@ public class TicketService {
 			return null;
 		} else {
 			cache.remove(ticket);
-			return generateST(appId, service);
+			String[] items = String.valueOf(obj).split("\\|");
+			if (items.length != 4) {
+				return null;
+			}
+			return generateST(appId, service, Long.valueOf(items[2]));
 		}
+	}
+
+	public String[] getItems(String st) {
+		Object obj = cache.get(st);
+		if (obj == null) {
+			log.debug("I want to read ticket string from cache, but it is null");
+			return null;
+		}
+
+		String[] items = String.valueOf(obj).split("\\|");
+		if (items.length != 4) {
+			log.debug("items length: " + items.length);
+			return null;
+		}
+		return items;
 	}
 }

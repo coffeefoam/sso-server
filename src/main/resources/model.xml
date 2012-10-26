@@ -51,9 +51,12 @@
 		<property name="presentstate" column="present_state" />
 		<property name="mobileerp" column="mobileerp" />
 		<property name="mobileerpid" column="mobileerpid" />
+
+		<one-to-one name="netBroker" property-ref="userid"  />
+		<many-to-one name="shops" column="residentshopid" unique="true" insert="false" update="false" lazy="false" />
 	</class>
 
-	<class name="NetBroker" table="NEW5I5JDBA.netbroker">
+	<class name="NetBroker" table="WEB5I5JDBA.netbroker">
 		<id name="id" column="id" />
 		<property name="userid" column="userid" />
 		<property name="creater" column="creater" />

@@ -13,54 +13,54 @@ import java.util.Date;
 public class NetBroker implements Serializable {
 	private static final long serialVersionUID = -4384143947658468396L;
 
-	private long id;
-	private long userid;
-	private long creater;
+	private Long id;
+	private Long userid;
+	private Long creater;
 	private Date createtime;
 	private String name;
-	private long isindex;
-	private long score;
-	private long areaid;
+	private Long isindex;
+	private Long score;
+	private Long areaid;
 	private String imgpath;
-	private long companysid;
-	private long blogtheme;
+	private Long companysid;
+	private Long blogtheme;
 	private String msn;
-	private long isimg;
-	private long brokertype;
-	private long renthousenum;
-	private long exchangehousenum;
+	private Long isimg;
+	private Long brokertype;
+	private Long renthousenum;
+	private Long exchangehousenum;
 	private String taobao;
 	private String sinaweibo;
 	private String fetion;
 	private String bbsuser;
 	private String bbspassword;
-	private long bestareaid;
-	private long bestdistrict;
+	private Long bestareaid;
+	private Long bestdistrict;
 	private String maxim;
 	private String callboard;
-	private long jobspecialsingle;
+	private Long jobspecialsingle;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public long getUserid() {
+	public Long getUserid() {
 		return userid;
 	}
 
-	public void setUserid(long userid) {
+	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
 
-	public long getCreater() {
+	public Long getCreater() {
 		return creater;
 	}
 
-	public void setCreater(long creater) {
+	public void setCreater(Long creater) {
 		this.creater = creater;
 	}
 
@@ -80,27 +80,27 @@ public class NetBroker implements Serializable {
 		this.name = name;
 	}
 
-	public long getIsindex() {
+	public Long getIsindex() {
 		return isindex;
 	}
 
-	public void setIsindex(long isindex) {
+	public void setIsindex(Long isindex) {
 		this.isindex = isindex;
 	}
 
-	public long getScore() {
+	public Long getScore() {
 		return score;
 	}
 
-	public void setScore(long score) {
+	public void setScore(Long score) {
 		this.score = score;
 	}
 
-	public long getAreaid() {
+	public Long getAreaid() {
 		return areaid;
 	}
 
-	public void setAreaid(long areaid) {
+	public void setAreaid(Long areaid) {
 		this.areaid = areaid;
 	}
 
@@ -112,19 +112,19 @@ public class NetBroker implements Serializable {
 		this.imgpath = imgpath;
 	}
 
-	public long getCompanysid() {
+	public Long getCompanysid() {
 		return companysid;
 	}
 
-	public void setCompanysid(long companysid) {
+	public void setCompanysid(Long companysid) {
 		this.companysid = companysid;
 	}
 
-	public long getBlogtheme() {
+	public Long getBlogtheme() {
 		return blogtheme;
 	}
 
-	public void setBlogtheme(long blogtheme) {
+	public void setBlogtheme(Long blogtheme) {
 		this.blogtheme = blogtheme;
 	}
 
@@ -136,35 +136,35 @@ public class NetBroker implements Serializable {
 		this.msn = msn;
 	}
 
-	public long getIsimg() {
+	public Long getIsimg() {
 		return isimg;
 	}
 
-	public void setIsimg(long isimg) {
+	public void setIsimg(Long isimg) {
 		this.isimg = isimg;
 	}
 
-	public long getBrokertype() {
+	public Long getBrokertype() {
 		return brokertype;
 	}
 
-	public void setBrokertype(long brokertype) {
+	public void setBrokertype(Long brokertype) {
 		this.brokertype = brokertype;
 	}
 
-	public long getRenthousenum() {
+	public Long getRenthousenum() {
 		return renthousenum;
 	}
 
-	public void setRenthousenum(long renthousenum) {
+	public void setRenthousenum(Long renthousenum) {
 		this.renthousenum = renthousenum;
 	}
 
-	public long getExchangehousenum() {
+	public Long getExchangehousenum() {
 		return exchangehousenum;
 	}
 
-	public void setExchangehousenum(long exchangehousenum) {
+	public void setExchangehousenum(Long exchangehousenum) {
 		this.exchangehousenum = exchangehousenum;
 	}
 
@@ -208,19 +208,19 @@ public class NetBroker implements Serializable {
 		this.bbspassword = bbspassword;
 	}
 
-	public long getBestareaid() {
+	public Long getBestareaid() {
 		return bestareaid;
 	}
 
-	public void setBestareaid(long bestareaid) {
+	public void setBestareaid(Long bestareaid) {
 		this.bestareaid = bestareaid;
 	}
 
-	public long getBestdistrict() {
+	public Long getBestdistrict() {
 		return bestdistrict;
 	}
 
-	public void setBestdistrict(long bestdistrict) {
+	public void setBestdistrict(Long bestdistrict) {
 		this.bestdistrict = bestdistrict;
 	}
 
@@ -240,11 +240,11 @@ public class NetBroker implements Serializable {
 		this.callboard = callboard;
 	}
 
-	public long getJobspecialsingle() {
+	public Long getJobspecialsingle() {
 		return jobspecialsingle;
 	}
 
-	public void setJobspecialsingle(long jobspecialsingle) {
+	public void setJobspecialsingle(Long jobspecialsingle) {
 		this.jobspecialsingle = jobspecialsingle;
 	}
 }

@@ -70,7 +70,7 @@ public class AuthGate extends AbstractGate {
 				// 分配相应的ST，然后跳转
 				log.debug("TGT be found [" + ticket + "]");
 				log.debug("After TGT found, we will generate new service ticket for you, baby.");
-				st = ticketService.generateST(appId, service);
+				st = ticketService.generateST(appId, service, Long.parseLong(_uid));
 			} else {
 				log.debug("Sorry, baby. we can't find TGT. Now, you should redirect login page.");
 				redirect = "/login";
