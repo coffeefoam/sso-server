@@ -47,7 +47,7 @@ public class YoomaiContext extends GuiceServletContextListener {
 					serve("/auth").with(AuthGate.class);
 					serve("/login").with(LoginGate.class);
 					serve("/welcome").with(WelcomeGate.class);
-					serve("/user").with(UserGate.class);
+					serve("/service/user").with(UserGate.class);
 				}
 			}
 		);

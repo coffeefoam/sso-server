@@ -73,6 +73,16 @@ public class User implements Serializable {
 	private String lastIp;
 	@Transient
 	private Date lastTime;
+	@Transient
+	private String ticket;
+
+	public String getTicket() {
+		return ticket;
+	}
+
+	public void setTicket(String ticket) {
+		this.ticket = ticket;
+	}
 
 	public Long getUid() {
 		return uid;

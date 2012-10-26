@@ -46,7 +46,7 @@ public class UserGate extends AbstractGate {
 			result = "";
 		} else {
 			User user = service.find(Long.parseLong(items[2]));
-			log.debug("net broker:" + user.getNetBroker());
+			user.setTicket(items[4]);
 			result = JSONObject.fromObject(user).toString();
 		}
 

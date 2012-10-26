@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.Cookie;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -132,7 +133,7 @@ public class TicketService {
 		}
 	}
 
-	public String[] getItems(String st) {
+	public String[] getItems(String st) throws UnsupportedEncodingException {
 		Object obj = cache.get(st);
 		if (obj == null) {
 			log.debug("I want to read ticket string from cache, but it is null");
@@ -144,6 +145,11 @@ public class TicketService {
 			log.debug("items length: " + items.length);
 			return null;
 		}
-		return items;
+		cache.remove(st);
+		String ticket = generateST(items[0], items[1], Long.parseLong(items[2]));
+
+		String[] items2 = Arrays.copyOf(items, 5);
+		items2[4] = ticket;
+		return items2;
 	}
 }
