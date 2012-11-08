@@ -53,4 +53,8 @@ public class UserGate extends AbstractGate {
 		Writer writer = response.getWriter();
 		writer.write(result);
 	}
+
+	protected  void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
 }

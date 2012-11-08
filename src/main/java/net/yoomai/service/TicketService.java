@@ -136,7 +136,7 @@ public class TicketService {
 	public String[] getItems(String st) throws UnsupportedEncodingException {
 		Object obj = cache.get(st);
 		if (obj == null) {
-			log.debug("I want to read ticket string from cache, but it is null");
+			log.debug("I want to read ticket(" + st + ") string from cache, but it is null");
 			return null;
 		}
 

@@ -131,4 +131,13 @@
 		<property name="lastIp" column="lastIp"/>
 		<property name="lastTime" column="lastTime"/>
 	</class>
+
+	<class name="CenterLogonInfo" table="WEB5I5JDBA.center_logon_info">
+		<id name="id" column="id" />
+		<property name="userId" column="userid" />
+		<property name="ip" column="id" />
+		<property name="inputDate" column="inputdate" />
+		<property name="companySid" column="companysid" />
+		<property name="logonType" column="logontype" />
+	</class>
 </hibernate-mapping>
