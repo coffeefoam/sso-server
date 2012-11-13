@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="GBK">
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/YoomaiContext.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/config/GlobalConfig.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/config/InitializerHibernate.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/db/BaseDAO.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/db/GrantTicketDAO.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/db/UserDAO.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/gate/AbstractGate.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/gate/AuthGate.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/gate/LoginGate.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/gate/UserGate.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/gate/WelcomeGate.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/model/CenterAdmin.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/model/GrantTicket.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/model/NetBroker.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/model/Shops.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/model/User.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/module/CacheModule.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/module/DBModule.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/module/TemplateModule.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/module/annotation/CM.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/module/annotation/Encoding.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/service/TemplateService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/service/TicketService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/service/UserService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/net/yoomai/util/StringUtils.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/webapps/WEB-INF/pages/0.1/login.vm" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/webapps/WEB-INF/pages/0.1/ticket.vm" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/webapps/WEB-INF/pages/0.1/user-info.vm" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/webapps/WEB-INF/pages/0.1/welcome.vm" charset="GBK" />
+  </component>
+</project>
+

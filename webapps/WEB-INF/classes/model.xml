@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="net.yoomai.model">
+	<class name="User" table="NEW5I5JDBA.users">
+		<id name="uid" column="usersid"></id>
+		<property name="companysid" column="companysid" />
+		<property name="rolesid" column="rolesid" />
+		<property name="headerId" column="headerId" />
+		<property name="username" column="username" />
+		<property name="usertel" column="usertel" />
+		<property name="useridcord" column="useridcord" />
+		<property name="password" column="password"/>
+		<property name="sex" column="sex" />
+		<property name="birthday" column="birthday" />
+		<property name="usertitle" column="usertitle" />
+		<property name="hometel" column="hometel" />
+		<property name="bp" column="bp" />
+		<property name="handset" column="handset" />
+		<property name="address" column="address" />
+		<property name="elseinfo" column="elseinfo" />
+		<property name="departmentsid" column="departmentsid" />
+		<property name="vestdept" column="vestdept" />
+		<property name="residentshopid" column="residentshopid" />
+		<property name="employeeid" column="employeeid" />
+		<property name="status" column="status" />
+		<property name="loginname" column="loginname" />
+		<property name="rolescope" column="rolescope" />
+		<property name="team" column="team" />
+		<property name="useremail" column="useremail" />
+		<property name="comemail" column="comemail" />
+		<property name="cellview" column="cellview" />
+		<property name="enterdate" column="enterdate" />
+		<property name="leavedate" column="leavedate" />
+		<property name="iswebbroker" column="iswebbroker" />
+		<property name="brokercard" column="brokercard" />
+		<property name="registcoderole" column="registcoderole" />
+		<property name="viewsum" column="viewsum" />
+		<property name="msnid" column="msn_id" />
+		<property name="qqid" column="qq_id" />
+		<property name="wbrokerleaderid" column="wbrokerleaderid" />
+		<property name="iswbrokerleader" column="iswbrokerleader" />
+		<property name="physicalshopid" column="physical_shop_id" />
+		<property name="phs" column="phs" />
+		<property name="bpbak" column="bp_bak" />
+		<property name="bpbakid" column="bp_bak_id" />
+		<property name="certificate" column="certificate" />
+		<property name="is5i5jwebuser" column="is5i5jwebuser" />
+		<property name="copyrolescope" column="copy_rolescope" />
+		<property name="presentstate" column="present_state" />
+		<property name="mobileerp" column="mobileerp" />
+		<property name="mobileerpid" column="mobileerpid" />
+
+		<one-to-one name="netBroker" property-ref="userid"  />
+		<many-to-one name="shops" column="residentshopid" unique="true" insert="false" update="false" lazy="false" />
+	</class>
+
+	<class name="NetBroker" table="WEB5I5JDBA.netbroker">
+		<id name="id" column="id" />
+		<property name="userid" column="userid" />
+		<property name="creater" column="creater" />
+		<property name="createtime" column="createtime" />
+		<property name="name" column="name" />
+		<property name="isindex" column="isindex" />
+		<property name="score" column="score" />
+		<property name="areaid" column="areaid" />
+		<property name="imgpath" column="imgpath" />
+		<property name="companysid" column="companysid" />
+		<property name="blogtheme" column="blogtheme" />
+		<property name="msn" column="msn" />
+		<property name="isimg" column="isimg" />
+		<property name="brokertype" column="brokertype" />
+		<property name="renthousenum" column="renthousenum" />
+		<property name="exchangehousenum" column="exchangehousenum" />
+		<property name="taobao" column="taobao" />
+		<property name="sinaweibo" column="sinaweibo" />
+		<property name="fetion" column="fetion" />
+		<property name="bbsuser" column="bbsuser" />
+		<property name="bbspassword" column="bbspassword" />
+		<property name="bestareaid" column="bestareaid" />
+		<property name="bestdistrict" column="bestdistrict" />
+		<property name="maxim" column="maxim" />
+		<property name="callboard" column="callboard" />
+		<property name="jobspecialsingle" column="jobspecialsingle" />
+	</class>
+
+	<class name="Shops" table="NEW5I5JDBA.shops">
+		<id name="shopsid" column="shopsid" />
+		<property name="departmentsid" column="departmentsid" />
+		<property name="shopname" column="shopname" />
+		<property name="shopaddress" column="shopaddress" />
+		<property name="shoptel" column="shoptel" />
+		<property name="shopmaster" column="shopmaster" />
+		<property name="shopremark" column="shopremark" />
+		<property name="companysid" column="companysid" />
+		<property name="rentsuperintend" column="rentsuperintend" />
+		<property name="zhihuansuperintend" column="zhihuansuperintend" />
+		<property name="status" column="status" />
+		<property name="othershops" column="othershops" />
+		<property name="shopgroupid" column="shopgroupid" />
+		<property name="rentbrokers" column="rentbrokers" />
+		<property name="exbrokers" column="exbrokers" />
+		<property name="apartrentbrokers" column="apartrentbrokers" />
+		<property name="x" column="x" />
+		<property name="y" column="y" />
+		<property name="shoptype" column="shop_type" />
+		<property name="district" column="district" />
+		<property name="linememo" column="line_memo" />
+		<property name="opendate" column="open_date" />
+		<property name="closedate" column="close_date" />
+		<property name="isplace" column="isplace" />
+		<property name="accountno" column="account_no" />
+		<property name="newdeptid" column="new_dept_id" />
+		<property name="physicalshopid" column="physical_shop_id" />
+		<property name="aliascnspell" column="alias_cnspell" />
+		<property name="umark" column="umark" />
+		<property name="hrid" column="hrid" />
+	</class>
+
+	<class name="CenterAdmin" table="NEW5I5JDBA.center_admin">
+		<id name="userid" column="userid"></id>
+		<property name="type" column="type" />
+		<property name="inputDate" column="inputdate" />
+	</class>
+
+	<class name="GrantTicket" table="NEW5I5JDBA.ssotgt">
+		<id name="uid" column="userid"/>
+		<property name="sid" column="sid"/>
+		<property name="ticket" column="ticket"/>
+		<property name="lastIp" column="lastIp"/>
+		<property name="lastTime" column="lastTime"/>
+	</class>
+
+	<class name="CenterLogonInfo" table="WEB5I5JDBA.center_logon_info">
+		<id name="id" column="id" />
+		<property name="userId" column="userid" />
+		<property name="ip" column="ip" />
+		<property name="inputDate" column="inputdate" />
+		<property name="companySid" column="companysid" />
+		<property name="logonType" column="logontype" />
+	</class>
+</hibernate-mapping>
