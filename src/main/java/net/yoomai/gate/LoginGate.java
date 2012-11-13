@@ -43,7 +43,7 @@ public class LoginGate extends AbstractGate {
 			long uid = NetUtil.getLongParameter(request, "uid", 0);
 			String password = NetUtil.getStringParameter(request, "password", "");
 
-			User user = userService.auth(uid, password);
+			User user = userService.auth(uid, password, request.getRemoteAddr());
 
 			if (user == null) {
 				response.sendRedirect("/login?" + makeParamURL(request));

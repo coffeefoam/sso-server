@@ -15,7 +15,7 @@ public class CenterLogonInfo implements Serializable {
 	private Long userId;
 	private String ip;
 	private Date inputDate;
-	private Integer companySid;
+	private Long companySid;
 	private Integer logonType;
 
 	public long getId() {
@@ -50,11 +50,11 @@ public class CenterLogonInfo implements Serializable {
 		this.inputDate = inputDate;
 	}
 
-	public Integer getCompanySid() {
+	public Long getCompanySid() {
 		return companySid;
 	}
 
-	public void setCompanySid(Integer companySid) {
+	public void setCompanySid(Long companySid) {
 		this.companySid = companySid;
 	}
 
